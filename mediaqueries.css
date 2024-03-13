@@ -3,6 +3,9 @@
         height: 83vh;
         margin-bottom: 6rem;
     }
+    .logo {
+        height: 120px;
+    }
     .about-containers {
         flex-wrap: wrap;
     }
@@ -12,6 +15,9 @@
 @media screen and (max-width: 1200px) {
     #desktop-nav {
         display: none;
+    }
+    .logo {
+        height: 100px;
     }
     #hamburger-nav {
         display: flex;
@@ -72,12 +78,16 @@
         font-size: 1.25rem;
     }
     .logo {
+        height: 100px;
         font-size: 1.5rem;
     }
     .nav-links {
         flex-direction: column;
         gap: 0.5rem;
         text-align: center;
+    }
+    .nav-links, li {
+        background-color: rgb(40,40,40);
     }
     .section__pic-container {
         width: auto;
