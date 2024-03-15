@@ -461,10 +461,11 @@ article .icon {
 }
 
 .contact-icon {
-    cursor: default;
+    cursor: pointer;
 }
 
 .email-icon {
+    cursor: default;
     height: 2.5rem;
 }
 
