@@ -1,0 +1,139 @@
+html {
+    background: #456990;
+}
+
+@font-face {
+    font-family: 'Pixel Scratch';
+    src: url('assets/PixelScratch.woff2') format('woff2'),
+        url('assets/PixelScratch.woff') format('woff'),
+        url('assets/pixelscratch.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    display: flex;
+    justify-content: space-evenly;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 40px;
+    padding: 40px;
+    color: #080708;
+}
+
+h1, h2, h3 {
+    font-family: 'Pixel Scratch';
+    font-optical-sizing: auto;
+    padding: 40px;
+    margin: 40px;
+}
+
+h2, h3 {
+    padding: 20px;
+    margin: 20px;
+}
+
+.nav-links {
+    gap: 2rem;
+    list-style: none;
+    font-size: 1.5rem;
+    justify-content: space-around;
+    align-items: center;
+    height: 17vh;
+}
+
+a, .nav-links {
+    font-family: 'Pixel Scratch';
+    font-optical-sizing: auto;
+    color: #080708;
+    text-decoration: none;
+    text-decoration-color: #1affd5;
+}
+
+a:hover {
+    color: #1affd5;
+    text-decoration: underline;
+    text-underline-offset: 1px;
+    text-decoration-color: #1affd5;
+}
+
+#blog {
+    width: 60%;
+    height: 200vh;
+    min-height: 1000px;
+    display: flex;
+    flex-direction: column;
+    border-top: 2px dotted #d1345b;
+}
+
+.blog-post {
+    padding: 20px;
+    border-bottom: 2px dotted #456990;
+}
+
+#blog, #sidebar {
+    border: 5px solid #080708;
+    background-color: #c4b7cb;
+    border-radius: 5px;
+    color: #242424;
+    padding: 20px;
+}
+
+#sidebar {
+    background-color: #028090;
+    width: 25%;
+    height: 25%;
+    min-height: 200px;
+    overflow: auto;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5%;
+}
+
+.img-container-1 {
+    height: auto;
+    width: 50vw;
+    text-decoration: none;
+    text-align: center;
+}
+
+.img-container-2 {
+    height: 300px;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    text-decoration: none;
+    text-align: center;
+    float: left;
+}
+
+table {
+    border: 2px solid #070707;
+    border-radius: 5px;
+    margin: 40px;
+}
+
+th {
+    padding: 10px;
+    border-bottom: 2px dotted #d1345b;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+h2 {
+    font-size: 3em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+p {
+    line-height: 1.5em;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="blogstyle.css">
+    <link rel="stylesheet" href="mediaqueries.css">
+</head>
+<body>
+    <section id="sidebar">
+        <h1>THE BLOG</h1>
+        <div>
+            <ul class="nav-links">
+                <li><a href="index.html">~ HOME</a></li>
+                <li><a href="index.html#projects">~ PROJECTS</a></li>
+                <li><a href="index.html#experience">~ EXPERIENCE</a></li>
+                <li><a href="index.html#about">~ ABOUT</a></li>
+                <li><a href="index.html#contact">~ CONTACT</a></li>
+            </ul>
+        </div>
+    </section>
+    <section id="blog">
+        <h2>RECENT SIDE PROJECTS</h2>
+        <div class="blog-post">
+            <h3>SCRYTHE</h3>
+            <address class="author"><a rel="author" href="https://lucwalz.com/">&ensp; LUC WALZ</a></address>
+            <time datetime="2024-06-09" title="June 9th, 2024">June 9th, 2024</time>
+            <img alt="Scrythe Prototype" class="img-container-1" src="assets/scrythe.PNG">
+            <figure>
+                A screenshot from a work in progess Scrythe prototype
+            </figure>
+            <p>Scrythe is a wizarding roguelike I am building with some friends of mine. It's to be a dungeon crawler where you play as an apprentice mage locked within a seemingly unremarkable dungeon. Your only direction down, you descend in hopes of finding another way out. I am in the most extreme early stages of prototyping this idea, and the above image reflects that. We haven't quite landed on an artstyle for the game, but I have some ideas for post processing that will look a lot more 'dungeon-y' than the toon shading that exists now. Aside from that, I am currently workign to get the game's basic, underlying systems implemented so I can get a first playtest out to friends and get them familiar with the idea.
+            </p>
+            <blockquote><p>To explore different experiences that we want to allow in Scrythe, we plan to have a handful of different casting tools. Each type will have different styles of play, with unique utilities and basic spell types assigned them. These abilities will align with the feeling we want each casting tool to evoke. For example, we'll have: 
+            </p></blockquote>
+            <table>
+                <tr>
+                    <th>Casting Tools</th>
+                    <th>Basic Spell</th>
+                    <th>Utility</th>
+                </tr>
+                <tr>
+                    <td>Staffs</td>
+                    <td>Beam</td>
+                    <td>Teleport</td>
+                </tr>
+                <tr>
+                    <td>Wands</td>
+                    <td>Burst</td>
+                    <td>Dodge</td>
+                </tr>
+                <tr>
+                    <td>Orbs</td>
+                    <td>Dart</td>
+                    <td>Parry</td>
+                </tr>
+                <tr>
+                    <td>Tomes/Grimoires</td>
+                    <td>Burst, Blast</td>
+                    <td>Transfigure</td>
+                </tr>
+                <tr>
+                    <td>Gauntlets</td>
+                    <td>Blast</td>
+                    <td>Bulwark</td>
+                </tr>
+                <tr>
+                    <td>Rings</td>
+                    <td>Chain</td>
+                    <td>Shift</td>
+                </tr>
+            </table>
+        </div>
+        <div class="blog-post">
+            <h3>DON'T PRESS A TO JUMP</h3>
+            <address class="author"><a rel="author" href="https://lucwalz.com/">&ensp; LUC WALZ</a></address>
+            <time datetime="2024-06-08" title="June 8th, 2024">June 8th, 2024</time>
+            <p>Jump is a game I programmed on Panic's Playdate handheld console. My introduction to Lua, I had a blast making this game. It's an endless runner in which you play as a mage/wizard, using Playdate's crank feature to rotate and casting fireballs to propel yourself in any direction over open ocean. With a limited number of slowly recharging fireballs, you must conserve charges by firing on passing razorbills, or hitching rides on the backs of albatross. You also have another ability aside from propelling charges, jumping. A jump will save you from death, giving height away from the deadly ocean, but comes at a price. Each jump will tip the game's difficulty scale, more danger means more dense bird spawns, as well as a higher chance to be struck by a stray lightning bolt.</p>
+            <img alt="Jump Title" class="img-container-2" src="assets/jump.png">
+            <figure>Don't Press A to Jump's title screen</figure>
+            <p><a href="https://play.date/">&ensp; PLAYDATE</a></p>
+            <blockquote><p>The Playdate is a super neat little console. I love it for just fidgeting with a classic gaming experience. Panic makes it super easy to develop for this little guy too. I wrote this game almost entirely in Lua using the Playdate SDK in Visual Studio, but Panic provides an alternative called Playdate Pulp. Pulp is web-based game-maker that allows users to draw, animate, create fonts & sound, and edit levels too! I used Pulp's chiptune editor to make the sound effects in this game.</p></blockquote>
+        </div>
+    </section>
+</body>
+</html>
