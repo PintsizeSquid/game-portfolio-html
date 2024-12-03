@@ -98,8 +98,8 @@
         margin-bottom: 0;
     }
     #projects {
-        height: 200vh;
-        margin-bottom: 0;
+        /* height: 200vh; */
+        margin-bottom: 2rem;
     }
     #experience {
         height: 200vh;

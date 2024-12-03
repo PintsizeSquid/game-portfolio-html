@@ -211,6 +211,17 @@ section {
     border-radius: 15%;
 }
 
+.freak-container .freak-shot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    max-height: 400px;
+    background: #393e41;
+    border: #080708 0.1rem solid;
+    border-radius: 1rem;
+}
+
 .section__text {
     align-self: center;
     text-align: center;
@@ -309,6 +320,8 @@ section {
 .about-containers, 
 .about-details-container {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .about-pic {
@@ -400,7 +413,8 @@ article .icon {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 120vh;
+    /* height: 120vh; */
+    margin-bottom: 2rem;
 }
 
 .color-container {
