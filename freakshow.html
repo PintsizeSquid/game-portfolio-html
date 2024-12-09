@@ -72,7 +72,7 @@
             <br>
             <br>
             <p class="section__text__p2">
-                FREAKSHOW IS A 3D, FIRST-PERSON, MULTIPLAYER HORROR GAME FORCING UNFORTUNATE CONTESTANTS THROUGH A DEADLY GAME SHOW, ALL VIEWED LIVE BY A HANDS-ON AUDIENCE!
+                FREAKSHOW IS A 3D, FIRST-PERSON, MULTIPLAYER HORROR GAME THAT FORCES UNFORTUNATE CONTESTANTS INTO A DEADLY GAME SHOW, ALL VIEWED LIVE BY A HANDS-ON AUDIENCE!
             </p>
             <p class="section__text__p1">
                 FREAKSHOW WAS MADE BY A TEAM OF 17 OVER A 15-WEEK COURSE AT MICHIGAN STATE UNIVERSITY.
@@ -84,7 +84,7 @@
     </section>
     <section id="role">
         <div class="section__text">
-            <h1 class="title" style="color:#c0fdfb;">ROLES</h1>
+            <h1 class="title" style="color:#c0fdfb;">ROLE</h1>
         </div>
         <div class="section-container">
             <div class="freak-details-container">
@@ -93,12 +93,12 @@
                         <h1 class="title">NETWORK PROGRAMMER</h1>
                         <div class="freak-list">
                             <div>
-                                <p class="section__text__p2" align="left">
+                                <p class="section__text__p2" align="center">
                                     THE AUDIENCE SYSTEM
                                 </p>
-                                <h3 align="left"> &ensp; My main task in Freakshow was to create a functioning audience system, the idea stemming from similar systems seen in Jackbox Games.</h3>
-                                <h3 align="left"> &ensp; Originally, Freakshow was planned to support an integration with Twitch.tv, where a streamer could allow their viewers to interact with their game. While we still would like to include this functionality, we struggled to get a playable version of this to test with. I was tasked with creating a system we could iterate off of in the meantime.</h3>
-                                <h3 align="left"> &ensp; Thus, the Audience System was born. I first spent some time designing the system to play through a WebGL build in browser. However, we ultimately shifted gears to include the Audience System in the desktop application, supporting more features. </h3>
+                                <h3 align="left"> &ensp; My main task in Freakshow was to create a functioning audience system, inspired by similar systems seen in Jackbox Games.</h3>
+                                <h3 align="left"> &ensp; Originally, Freakshow was planned to support integration with Twitch.tv, where a streamer could allow their viewers to interact with their game. While this feature is still planned, we struggled to implement a playable version for testing during development. To address this, I was tasked with creating a system we could iterate on in the meantime.</h3>
+                                <h3 align="left"> &ensp; Thus, the Audience System was born. Initially, I designed it to play through a WebGL build in-browser. However, we ultimately pivoted to include the Audience System in the desktop application, allowing support for more features.</h3>
                             </div>
                             <img 
                                 src="./assets/freakshow-lobby.png" 
@@ -113,11 +113,11 @@
                                 class="freak-pic"
                             >
                             <div>
-                                <p class="section__text__p2" align="right">
+                                <p class="section__text__p2" align="center">
                                     LOBBIES
                                 </p>
-                                <h3 align="left"> &ensp; At the base, there's a lobby system. Here contestants wait to build an audience. The contestant's room is assigned a 'Join Code', and through Unity's Netcode for GameObjects, Relay and Transport packages, audience members get their ticket to the Freakshow.</h3>
-                                <h3 align="left"> &ensp; Once ready, the contestant can choose to start the game, which pulls the contestant and all connected audience members through the loading process and into Freakshow. </h3>
+                                <h3 align="left"> &ensp; At its core, the game utilizes a lobby system. Here, contestants wait to build an audience. The contestant's room is assigned a 'Join Code', and through Unity's Netcode for GameObjects, Relay, and Transport packages, audience members get their ticket to the Freakshow.</h3>
+                                <h3 align="left"> &ensp; Once ready, the contestant can start the game. This pulls the contestant and all connected audience members through the loading process and into the Freakshow. </h3>
                             </div>
                         </div>
                         <div class="freak-list">
@@ -134,11 +134,11 @@
                         </div>
                         <div class="freak-list">
                             <div>
-                                <p class="section__text__p2" align="left">
+                                <p class="section__text__p2" align="center">
                                     AUDIENCE METERS
                                 </p>
-                                <h3 align="left"> &ensp; Now loaded into the game, members of the audience are presented with a live map of Freakshow's grounds. They can see the positions of the contestant and nearby monsters marked by blue and red dots.</h3>
-                                <h3 align="left"> &ensp; The Audience is provided with means to interact with the contestant's game through the 'Shenanigan Meter'. Each member has their own meter and point pool they can spend with for one of three increasingly expensive interactions. For each point spent, members of the audience pool towards a collective 'Monster Meter'. As this meter builds, at each milestone, a tougher monster will appear to increase the contestant's difficulty.
+                                <h3 align="left"> &ensp; Now, members of the audience are presented with my largest creation. They are each given a live map of Freakshow's grounds, allowing them to see the positions of the contestant and nearby monsters, marked as blue and red dots, respectively.</h3>
+                                <h3 align="left"> &ensp; The audience can interact with the contestant's game through the 'Shenanigan Meter'. Each member has their own meter and point pool, which they can spend on any of three increasingly expensive interactions. For every point spent, audience members contribute to a collective 'Monster Meter'. At each milestone, a tougher monster spawns, increasing the difficulty for the contestant.
                                 </h3>
                             </div>
                             <img 
@@ -154,13 +154,13 @@
                                 class="freak-pic"
                             >
                             <div>
-                                <p class="section__text__p2" align="right">
+                                <p class="section__text__p2" align="center">
                                     SHENANIGANS
                                 </p>
-                                <h3 align="left"> &ensp; Members of the audience have these shenanigans at their disposal: </h3>
-                                <h3 align="left">- SOUND: Plays a selected sound over the building's speakers for the contestant to hear.</h3>
-                                <h3 align="left">- LIGHT: Disables the contestant's flashlight for a time, leaving them in darkness.</h3>
-                                <h3 align="left">- TRAP: Allows the audience member to place a beartrap in a viable location by simply clicking on the live map. These traps are marked with a red 'X' on the map afterwards.</h3>
+                                <h3 align="left"> &ensp; Audience members have these shenanigans at their disposal: </h3>
+                                <h3 align="left">- SOUND: Plays a selected sound over the building's speakers for the contestant to hear, laughing at their misfortune.</h3>
+                                <h3 align="left">- LIGHT: Disables the contestant's flashlight for a time, leaving them in darkness for dangers to creep up.</h3>
+                                <h3 align="left">- TRAP: Allows the audience member to place a beartrap in a viable location by simply clicking on the live map. These traps are marked with a red 'X' on the map after placement and will temporarily lock the contestant down if hit, potentially setting them up for capture.</h3>
                             </div>
                         </div>
                     </div>
@@ -177,11 +177,12 @@
                 <div class="freak-containers">
                     <div class="freak-container" style="margin-bottom: 2rem;">
                         <h1 class="title">THE ITERATIVE PROCESS</h1>
-                        <h3 align="left"> &ensp; I quickly learned how much initial ideas change over the course of a project, where we've landed now is far from the target we set ourselves early in development. Obviously this isn't a bad thing, we're very happy with the game we've created, but it was not without scrapped ideas/mechanics. I myself came across plenty of game-breaking bugs, and learned a lot in working through them. The most important thing was to find the fun, playtest plenty, and figure out what worked well or didn't.</h3>
+                        <h3 align="left"> &ensp; I quickly learned how much initial ideas change over the course of a project. Where we've landed now is far from the target we set at the start of development. This isn't a bad thing--we're very happy with the game we've created--but it wasn't without challenges. On my part, I came across plenty of game-breaking bugs, and learned a lot in working through them.</h3>
+                        <h3 align="left"> &ensp; The most important thing was to find the fun, playtest plenty,  and figure out what worked well and what didn't. Through this testing, we were able to make necessary gameplay changes to the Audience System. The feedback we received was the reason I continued implementing live map features. Playtesters especially enjoyed the ability to mess with one another in real time. Seeing this reinforced the chaotic dynamic the team was looking for in the game.</h3>
                     </div>
                     <div class="freak-container">
                         <h1 class="title">TIME MANAGEMENT</h1>
-                        <h3 align="left"> &ensp; Surprise, surprise. Managing my time is still something I'm figuring out, and likely will be for the rest of my life. In probably the busiest semester of my college career, I fought to keep myself on pace in this project without burning out. I did so by giving myself time blocks for this project throughout the weeks/days, time I'd dedicate to researching a solution to a problem, or time I'd spend implementing a new feature or fix.</h3>
+                        <h3 align="left"> &ensp; Surprise, surprise--managing time is still something I'm figuring out, and likely will be for the rest of my life. In probably the busiest semester of my college career, I fought to keep myself on pace in this project without burning out. I did so by giving myself time blocks for this project throughout the week. I used these blocks to focus on researching solutions to problems or implementing new features and fixes.</h3>
                     </div>
                 </div>
             </div>
