@@ -202,6 +202,7 @@ section {
 .section__pic-container img {
     background: #393e41;
     border: #080708 0.1rem solid;
+    max-height: 30vh;
     border-radius: 50%;
 }
 
@@ -209,17 +210,6 @@ section {
     background: #393e41;
     border: #080708 0.1rem solid;
     border-radius: 15%;
-}
-
-.freak-container .freak-shot {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
-    max-height: 400px;
-    background: #393e41;
-    border: #080708 0.1rem solid;
-    border-radius: 1rem;
 }
 
 .section__text {
@@ -438,6 +428,79 @@ article .icon {
 
 .about-containers .details-container .btn-container {
     background: #4f9d69;
+}
+
+/* FREAKSHOW */
+
+#freakshow {
+    height: fit-content;
+}
+
+#role {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    max-width: 100%;
+    margin-bottom: 5rem;
+}
+
+.freak-details-container {
+    justify-content: center;
+    flex-direction: column;    
+}
+
+.freak-containers, 
+.freak-details-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.freak-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    flex: 1;
+    background: #4f9d69;
+    border-radius: 2rem;
+    border: #080708 0.1rem solid;
+    border-color: #080708;
+    text-align: center;
+}
+
+.freak-container .freak-shot {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 75vw;
+    background: #393e41;
+    border: #080708 0.1rem solid;
+    border-radius: 1rem;
+}
+
+.freak-container p, img, h3 {
+    background: #4f9d69;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.freak-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.freak-container .freak-pic {
+    display: block;
+    margin: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-bottom: 2rem;
+    max-width: 35vw;
+    background: #393e41;
+    border: #080708 0.1rem solid;
+    border-radius: 1rem;
 }
 
 /* CONTACT */
