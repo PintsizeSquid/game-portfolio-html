@@ -84,10 +84,13 @@
     table {
         margin: 0px;
     }
+    h3 {
+        font-size: 1rem;
+    }
     .freak-list {
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
 }
 
@@ -183,11 +186,13 @@
         font-size: 1.5rem;
     }
     .nav-links {
-        flex-direction: column;
+        height: fit-content;
+        flex-direction: row;
         gap: 0.5rem;
         text-align: center;
     }
     .nav-links, li {
+        height: fit-content;
         background-color: #4f9d69;
     }
     .section__pic-container {
