@@ -259,7 +259,7 @@ h5 {
   line-height: 1.2;
 }
 
-.ascii-art {
+.title .ascii-art {
   font-family: monospace;
   white-space: pre;
   display: block;
@@ -271,19 +271,19 @@ h5 {
 }
 
 @media (max-width: 768px) {
-  .ascii-art {
+  .title .ascii-art {
     font-size: 40%;
   }
 }
 
 @media (max-width: 480px) {
-  .ascii-art {
+  .title .ascii-art {
     font-size: 20%;
   }
 }
 
 @media (max-width: 320px) {
-  .ascii-art {
+  .title .ascii-art {
     font-size: 15%;
   }
 }
