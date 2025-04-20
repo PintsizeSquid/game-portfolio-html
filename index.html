@@ -994,6 +994,36 @@
         
         container.innerHTML = projectsHtml;
       });
+
+      // Mobile menu functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const navBtn = document.getElementById('nav-btn');
+        const navList = document.querySelector('.nav-list');
+        const navBtnImg = document.getElementById('nav-btn-img');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navBtn.addEventListener('click', function() {
+          navList.classList.toggle('active');
+          const isOpen = navList.classList.contains('active');
+          navBtnImg.src = isOpen ? 'img/icons/close.svg' : 'img/icons/open.svg';
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            navList.classList.remove('active');
+            navBtnImg.src = 'img/icons/open.svg';
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.nav') && !e.target.closest('.nav-btn')) {
+            navList.classList.remove('active');
+            navBtnImg.src = 'img/icons/open.svg';
+          }
+        });
+      });
     </script>
   </body>
 </html>
