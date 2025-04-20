@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luc Walz</title>
+    <link rel="shortcut icon" href="assets/icons/lw.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/media.css" />
+    <link rel="stylesheet" href="theme.css" />
+    <script type="module" src="js/shaderBackground.js"></script>
+    <style>
+      #project-content {
+        transition: opacity 0.2s ease-in-out;
+        margin-bottom: 60px;
+      }
+
+      .project-description, .project-details {
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      .project-links {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 20px;
+        z-index: 2;
+      }
+
+      .project-links a {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .project-links a:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+      }
+
+      .project-links img {
+        width: 32px;
+        height: 32px;
+        filter: invert(100%);
+      }
+
+      .project-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        overflow-y: auto;
+        display: none;
+      }
+
+      .project-overlay.active {
+        display: flex;
+        justify-content: center;
+      }
+
+      .project-overlay-content {
+        width: 90%;
+        max-width: 1200px;
+        margin: 2vh 0;
+        background: var(--bg-color);
+        border-radius: 8px;
+      }
+
+      .project-overlay-header {
+        padding: 15px 20px;
+      }
+
+      .project-overlay-header h2 {
+        margin: 0;
+        margin-bottom: 5px;
+      }
+
+      .project-overlay-header p {
+        margin: 0;
+      }
+
+      .project-overlay-body {
+        padding: 20px;
+        padding-bottom: 60px;
+      }
+
+      .overlay-close-btn-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px;
+        text-align: center;
+        backdrop-filter: blur(5px);
+        z-index: 1001;
+      }
+
+      .overlay-close-btn {
+        min-width: 120px;
+        padding: 8px 20px;
+      }
+
+      .carousel-container {
+        max-height: 40vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .carousel-slide {
+        flex: 0 0 100%;
+        height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .carousel-slide img {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+
+      @media screen and (max-width: 768px) {
+        .carousel-container,
+        .carousel-slide {
+          max-height: 30vh;
+          height: 30vh;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .carousel-container,
+        .carousel-slide {
+          max-height: 25vh;
+          height: 25vh;
+        }
+      }
+
+      .project-description a {
+        color: #4f9d69;
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .project-description a:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      <header id="header" class="header">
+        <div class="container container-lg">
+          <div class="header-nav">
+            <a
+              href="#home"
+              class="logo"
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
+              <img src="assets/icons/lw.png" alt="Luc Walz" class="logo-img">
+            </a>
+            <nav id="nav" class="nav">
+              <ul class="nav-list" data-aos="fade-down" data-aos-duration="1000">
+                <li class="nav-item">
+                  <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#contact" class="nav-link">Contact</a>
+                </li>
+              </ul>
+              <button id="nav-btn" class="nav-btn">
+                <img
+                  id="nav-btn-img"
+                  src="img/icons/open.svg"
+                  alt="Navigation button"
+                />
+              </button>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <section id="home" class="hero">
+        <canvas id="shader-canvas"></canvas>
+        <div class="container container-lg">
+          <div
+            class="hero-row"
+            data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-out"
+            data-aos-delay="500"
+            data-aos-duration="1000"
+          >
+            <div class="hero-content">
+              <pre class="hero-heading ascii-art">
+██╗     ██╗   ██╗ ██████╗    ██╗    ██╗ █████╗ ██╗     ███████╗
+██║     ██║   ██║██╔════╝    ██║    ██║██╔══██╗██║     ╚══███╔╝
+██║     ██║   ██║██║         ██║ █╗ ██║███████║██║       ███╔╝ 
+██║     ██║   ██║██║         ██║███╗██║██╔══██║██║      ███╔╝  
+███████╗╚██████╔╝╚██████╗    ╚███╔███╔╝██║  ██║███████╗███████╗
+╚══════╝ ╚═════╝  ╚═════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝</pre>
+              <span class="hero-heading-subtitle"
+                >Technical Artist & Graphics Programmer</span
+              >
+              <div class="about-social-list">
+                <div class="social-links-row">
+                  <a href="#!">
+                    <img
+                      src="assets/icons/github.png"
+                      alt="My GitHub profile"
+                      class="icon" 
+                      onclick="window.open('https://github.com/PintsizeSquid', '_blank');"
+                    />
+                  </a>
+
+                  <a href="#!">
+                    <img
+                      src="assets/icons/linkedin.png"
+                      alt="My LinkedIn profile"
+                      class="icon" 
+                      onclick="window.open('https://www.linkedin.com/in/luc-walz-0594232ba/', '_blank');"
+                    />
+                  </a>
+
+                  <a href="#!">
+                    <img 
+                      src="assets/icons/itch.png" 
+                      alt="My Itch.io profile"
+                      class="icon" 
+                      onclick="window.open('https://luc-walz.itch.io/', '_blank');"
+                    />
+                  </a>
+                  
+                </div>
+              </div>
+
+              <div>
+                <a href="#projects" class="btn">Projects</a>
+                <a href="#resume" class="btn btn-white" onclick="window.open('./assets/resume/walz-resume.pdf')">Resume</a>
+                <a href="#contact" class="btn btn-white">Contact Me</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="container">
+          <div class="about-title">
+            <pre class="title ascii-art">
+ █████╗ ██████╗  ██████╗ ██╗   ██╗████████╗
+██╔══██╗██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝
+███████║██████╔╝██║   ██║██║   ██║   ██║   
+██╔══██║██╔══██╗██║   ██║██║   ██║   ██║   
+██║  ██║██████╔╝╚██████╔╝╚██████╔╝   ██║   
+╚═╝  ╚═╝╚═════╝  ╚═════╝  ╚════╝    ╚═╝   </pre>
+          </div>
+          <div class="about-row">
+            <div class="about-image"
+              data-aos="fade-up"
+              data-aos-duration="1000">
+              <img src="assets/profile/profile-pic.png" alt="Luc Walz headshot" class="headshot-img">
+            </div>
+            <div
+              class="about-content"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
+              <p class="about-descr">
+                Hi, I'm Luc Walz, a game programmer and technical artist.
+                I'm a recent graduate of Michigan State University with 
+                a Bachelor's of Engineering in Computer Science and have found 
+                a love for creating unique visuals in games.
+              </p>
+            </div>
+            <div
+              class="about-skills"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="100"
+            >
+              <div class="skill">
+                <div class="skill-title">C++/C#</div>
+                <div class="skill-bar__progress"></div>
+              </div>
+              <div class="skill">
+                <div class="skill-title">Lua</div>
+                <div class="skill-bar__progress"></div>
+              </div>
+              <div class="skill">
+                <div class="skill-title">GLSL/HLSL</div>
+                <div class="skill-bar__progress">
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-title">HTML/CSS</div>
+                <div class="skill-bar__progress"></div>
+              </div>
+            </div>
+          </div>
+          <div class="services-row">
+            <div
+              class="service-card"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="50"
+            >
+              <img class="service-card-img" src="assets/icons/experience.png" alt="" />
+              <h3 class="service-card-title">Game Development</h3>
+              <p style="color: #bababa;">
+                Building unique and engaging games using a variety of platforms,
+                including Unity, Godot, and the Playdate SDK.
+              </p>
+            </div>
+
+            <div
+              class="service-card"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="500"
+            >
+              <img class="service-card-img" src="assets/icons/experience.png" alt="" />
+              <h3 class="service-card-title">Technical Art</h3>
+              <p style="color: #bababa;">
+                Rendering compelling visuals and experiences taking full control
+                of the rendering pipeline.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects">
+        <div class="container container-lg">
+          <div class="projects-title">
+            <pre class="title ascii-art">
+██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗███████╗
+██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝██╔════╝
+██████╔╝██████╔╝██║   ██║     ██║█████╗  ██║        ██║   ███████╗
+██╔═══╝ ██╔══██╗██║   ██║██   ██║██╔══╝  ██║        ██║   ╚════██║
+██║     ██║  ██║╚██████╔╝╚█████╔╝███████╗╚██████╗   ██║   ███████║
+╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝   ╚══════╝</pre>
+          </div>
+          
+          <div id="projects-container" class="projects-row">
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <div class="contact-title">
+            <pre class="title ascii-art">
+ ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗  ██████╗████████╗
+██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝
+██║     ██║   ██║██╔██╗ ██║   ██║   ███████║██║        ██║   
+██║     ██║   ██║██║╚██╗██║   ██║   ██╔══██║██║        ██║   
+╚██████╗╚██████╔╝██║ ╚████║   ██║   ██║  ██║╚██████╗   ██║   
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝   ╚═╝   </pre>
+          </div>
+          <div class="contact-content">
+            <p>
+              Reach out to me!
+            </p>
+          </div>
+          
+          <a href="mailto:luc.walz@motorhoney.com" class="email-capsule">
+            <img src="./assets/icons/email.png" alt="Email icon">
+            luc.walz@motorhoney.com
+          </a>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-row">
+            <div class="social-links-row footer-social">
+              <a href="#!">
+                <img
+                  src="assets/icons/github.png"
+                  alt="Link to GitHub account"
+                  onclick="window.open('https://github.com/PintsizeSquid', '_blank');"
+                />
+              </a>
+
+              <a href="#!">
+                <img
+                  src="assets/icons/linkedin.png"
+                  alt="Link to linkedin profile"
+                  onclick="window.open('https://www.linkedin.com/in/luc-walz-0594232ba/', '_blank');"
+                />
+              </a>
+
+              <a href="#!">
+                <img src="assets/icons/itch.png" alt="Link to itch.io profile" onclick="window.open('https://luc-walz.itch.io/', '_blank');" />
+              </a>
+            </div>
+
+            <div class="footer-copyright">
+              <p>&copy; Copyright Luc Walz 2025</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Project Overlay -->
+    <div id="project-overlay" class="project-overlay">
+      <div class="project-overlay-content">
+        <div class="project-overlay-header">
+          <h2 id="overlay-title"></h2>
+          <p id="overlay-subtitle"></p>
+        </div>
+        
+        <div class="project-overlay-body" id="overlay-body">
+          <!-- Carousel will be inserted here -->
+          <div class="carousel-container">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Images will be inserted here -->
+            </div>
+            <button class="carousel-button prev" id="carousel-prev">❮</button>
+            <button class="carousel-button next" id="carousel-next">❯</button>
+            <div class="carousel-dots" id="carousel-dots">
+              <!-- Dots will be inserted here -->
+            </div>
+          </div>
+
+          <!-- Project content will be inserted here -->
+          <div id="project-content"></div>
+        </div>
+        
+        <div class="overlay-close-btn-container">
+          <button class="overlay-close-btn" onclick="closeOverlay()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Project data
+      const projectData = {
+        'freakshow': {
+          title: 'Freakshow',
+          subtitle: 'A 3D, first-person multiplayer horror game that forces unfortunate contestants into a deadly game show, all viewed live by a hands-on audience!',
+          github: '',
+          itch: 'https://bilalsaqib19.itch.io/freakshow',
+          slides: [
+            {
+              image: 'assets/freakshow/freakshow-banner.png',
+              description: `Freakshow was made by a team of 17 over a 15-week course at Michigan State University.`,
+              details: [
+                'Implemented custom netcode solutions for peer-to-peer interactions',
+                'Implemented networked lobbies and a coherent game loop',
+                'Networked a live minimap for players to view and interact with',
+                'Networked cross-device interactions for shenanigans between players'
+              ]
+            },
+            {
+              image: 'assets/freakshow/freakshow-lobby.png',
+              description: `My main task in Freakshow was to create a functioning audience system, 
+                inspired by similar systems in Jackbox Games.<br><br>
+                
+                Originally, Freakshow was planned to support integration with Twitch.tv, 
+                where a steamer could allow their viewrs to interact with their game. 
+                However, we struggled to implement a playable version of this within a 
+                reasonable time frame for testing. To address this, I was tasked with 
+                creating a system we could iterate on in the meantime.<br><br>
+                
+                Thus, the Audience System was born. Initially, I designed it to play 
+                in-browser with WebGL. However, we ultimately pivoted to include the 
+                Audience System in the desktop application, allowing support for more features.`,
+              details: []
+            },
+            {
+              image: 'assets/freakshow/freakshow-loading.png',
+              description: `At its core, the game utilizes a lobby system. Here, 
+                contestants wait to build an audience. The contestant's room is assigned a 
+                'Join Code', and through Unity's Netcode for GameObjects, Relay, and Transport
+                packages, audience members get their ticket to the Freakshow.<br><br>
+                
+                Once ready, the contestant can start the game. This pulls the contestant 
+                and all connected audience members through the loading process and into the Freakshow.`,
+              details: []
+            },
+            {
+              image: 'assets/freakshow/audience-soundscroll.png',
+              description: `Now, members of the audience are presented with my largest creation. 
+                They are each given a live map of Freakshow's grounds, allowing them to see the positions 
+                of the contestant and nearby monsters, marked as blue and red dots, respectively.<br><br>
+                
+                The audience can interact with the contestant's game through the 'Shenanigan Meter'. 
+                Each member has their own meter and point pool, which they can spend on any of three 
+                increasingly expensive interactions. For every point spent, audience members contribute 
+                to a collective 'Monster Meter'. At each milestone, a tougher monster spawns, increasing 
+                the difficulty for the contestant.`,
+              details: []
+            },
+            {
+              image: 'assets/freakshow/audience-surrounded.png',
+              description: `Audience members have these shenanigans at their disposal:`,
+              details: [
+                'SOUND: Play a selected sound over the building speakers for the contestant to hear.',
+                'LIGHT: Flickers out and disables the contestants flashlight for a time.',
+                'TRAP: Allows the audience to place a beartrap on the map by clicking on the minimap. These traps are seen as red Xs on the map',
+              ]
+            },
+            
+          ]
+        },
+        'dontjump': {
+          title: "Don't Press A to Jump",
+          subtitle: 'An endless runner built for Panics Playdate',
+          github: 'https://github.com/PintsizeSquid/jumplocked',
+          itch: 'https://luc-walz.itch.io/dont-press-a-to-jump',
+          slides: [
+            {
+              image: 'assets/jump/lightning.png',
+              description: `Don't Press A to Jump is a simple endless runner I built from scratch for the 
+                Playdate handheld console.<br><br>
+                
+                Propel yourself over stormy seas, casting fireballs to gain momentum. Careful not to run
+                out of charges, you can jump to stop your fall, but risk increasing your bad luck. As
+                bad luck increases, so do enemy spawns and the the strength of the storms. Hopefully you
+                don't have any metal on you...`,
+              details: [
+                'Developed for Playdate\'s unique hardware features using the Playdate SDK',
+                'Created from scratch in Lua in ~1 month of development',
+                'Hand-drawn 1-bit pixel art assets'
+              ]
+            },
+            {
+              image: 'assets/jump/flight.png',
+              description: 'Catch an albatross to glide across the stormy seas, conserving your limited resources!',
+              details: []
+            },
+            {
+              image: 'assets/jump/lost.png',
+              description: 'Try your best to beat your high score!',
+              details: []
+            }
+          ]
+        },
+        'axolotlquest': {
+          title: 'Super Axolotl Quest: Overdrive',
+          subtitle: 'A buggy, yet strikingly realistic simulator of my axolotl, Noodles',
+          github: 'https://github.com/PintsizeSquid/Super-Axolotl-Quest-Overdrive',
+          itch: 'https://luc-walz.itch.io/super-axolotl-quest-overdrive',
+          slides: [
+            {
+              image: 'assets/axolotl/swimming.png',
+              description: `Super Axolotl Quest: Overdrive is a small side project I built in
+                Unity 3D to teach myself the basics of 3D modeling and animation in Blender.<br><br>
+                
+                Live the live of Noodles the axolotl, kicking back in your tank and tossing marbles.
+                The movement is very buggy and poorly implemented, but surprisingly the way Noodles moves is very
+                similar to how he does in real life.`,
+              details: [
+                'Modeled, rigged, and animated Noodles in Blender',
+                'Modeled and textured the tank and room environment',
+                'Created from scratch in ~1 week of development'
+              ]
+            },
+            {
+              image: 'assets/axolotl/cave.png',
+              description: 'Hang out in your cave!',
+              details: []
+            },
+            {
+              image: 'assets/axolotl/marble.png',
+              description: 'Push marbles around to your heart\'s content!',
+              details: []
+            }
+          ]
+        },
+        'metrofracture': {
+          title: 'Metro Fracture',
+          subtitle: 'A 2D brawler through an endless subway',
+          itch: 'https://luc-walz.itch.io/metro-fracture',
+          slides: [
+            {
+              image: 'assets/metro/metrofracture.png',
+              description: `Metro Fracture is a 2D Unity game made as a final project for a game programming 
+                course at Michigan State University.<br><br>
+                
+                Fight through infinitely looping subway cars filled with humanoid monsters! With a light and heavy punch,
+                shin kick, and headbutt, you can take down your foes. Make sure to block or duck when they attack back!`,
+              details: [
+                'Created custom pixel sprites and animations for the 4 unique characters',
+                'Created a player controller with fluid movement, attacks, and animations',
+                'All art, animations, and programming were made for this project in 4 weeks'
+              ]
+            },
+            {
+              image: 'assets/metro/hitter.png',
+              description: 'Careful not to get hit!',
+              details: []
+            },
+            {
+              image: 'assets/metro/grabber.png',
+              description: 'The grabber has range, but is a bit tall. Go for the shins!',
+              details: []
+            },
+            {
+              image: 'assets/metro/martyrdog.png',
+              description: 'The martyrdog is quick to pounce! Make sure to duck or block!',
+              details: []
+            },
+            {
+              image: 'assets/metro/gameover.png',
+              description: 'Careful not to crack!',
+              details: []
+            }
+          ]
+        },
+        'shaders': {
+          title: 'Shader Projects',
+          subtitle: 'A collection of custom shaders I have been playing around with',
+          slides: [
+            {
+              image: 'assets/shaders/outlines.png',
+              description: `This is a collection of custom shaders I have been experimenting with
+                in Unity 6 and other engines. I may make this a page on its own in the future, with
+                code snippets explaining my process and the math behind the shaders.<br><br>
+              
+                Above is a snippet of a sobel edge detection filter I made in Unity's ShaderGraph.
+                I'll be using this filter to build further effects from.`,
+              details: []
+            },
+            {
+              image: 'assets/shaders/pixelizedoutlines.png',
+              description: `Here is a continuation on the sobel edge detection filter, 
+                where I aimed to replicate the 3D pixel art effect <a href="https://imgur.com/gallery/creating-pixel-art-scene-realtime-3d-qwhbHQq" target="_blank">t3ssl8r</a> is known for.<br><br>
+
+                I have the depth outlines drawn red and the edge outlines drawn blue for clarity.`,
+              details: []
+            },
+            {
+              image: 'assets/shaders/dither.gif',
+              description: `Here I take the pixelation and pixel-perfect outlines even further,
+                applying a dither pattern to create a classic, more organic look.<br><br>
+
+                The dither pattern drawn over the whole texture, adjusting density based on
+                pixel luminance. I think it turned out really well, and plan to add color mapping
+                in the future to solidify the retro feel.`,
+              details: []
+            }
+          ]
+        },
+        'volleyguns': {
+          title: 'VolleyGuns',
+          subtitle: 'A local multiplayer game for 2-4 players witha new way to hit the ball... guns!',
+          slides: [
+            {
+              image: 'assets/volleyguns/menu.png',
+              description: `VolleyGuns is a stylized local multiplayer game that emphasizes unique
+                visuals reminiscent of games like Jet Set: Radio with cel-shaded graphics and 
+                screen-space outlines.<br><br>
+              
+                I had the opportunity to create a handful of shaders and visual effects for this project,
+                joining forces with friends in Game Development at Michigan State University.
+                This game is part of their final course, and we built the game from the ground up over
+                the course of a 4 month semester.`,
+              details: [
+                'Created screen-space outlines and cel-shaded effects',
+                'Created separate player outlines, uniquely colored for each player',
+                'Created a custom VFX for the ball, exploding into a burst of paint when popped',
+                'Created a barrier shader to show the courts invisible boundaries',
+                'Created a gradient laser effect so players could see their weapons damage effectiveness over distance'
+              ]
+            },
+            {
+              image: 'assets/volleyguns/toonoutline.png',
+              description: `This screenshot from the game captures the background environment. But highlights 
+                the cel-shaded effect and screen-space outlines I created for the game.`,
+              details: []
+            },
+            {
+              image: 'assets/volleyguns/playeroutline.png',
+              description: `Each player, when joining a controller, gets assigned a color. This color is used
+                in creating that player's own personal outline, which is used to identify them on the court.<br><br>
+
+                The screen-space outlines ignore the player's layer as to not stack multiple outlines, and these are drawn
+                using the inverse-hull method on the player's mesh. This allows for a bold outline that is easily visible by
+                the players. It also helps that we assign the player's shadow that same color.`,
+              details: []
+            },
+            {
+              image: 'assets/volleyguns/ball.gif',
+              description: `In VolleyGuns, our ball has a durability to it. When hit by a player's weapon,
+                the ball will take damage and eventually pop, creating a splash of color around the court.<br><br>
+
+                The ball gains back some durability when crossing the net, creating a sort of hot-potato mechanic as
+                players try to keep the ball in play.`,
+              details: []
+            },
+            {
+              image: 'assets/volleyguns/barrier.gif',
+              description: `As the ball is hit, it may bounce off of invisible boundaries that fall around the court.
+                To show that there is a boundary, I created a shader that leaves behind an imprint on the barrier as 
+                the ball bounces off of it.`,
+              details: []
+            },
+            {
+              image: 'assets/volleyguns/laser.png',
+              description: `Each player has a laser pointer emitting from the barrel of their selected weapon.
+                A core mechanic of volleyguns is that a players shots always hit the ball, so the game becomes one
+                of positioning and timing. <br><br>
+
+                The laser is a line renderer with a shader material applied. Each weapon has set effectiveness values
+                based on distance. So using this, I change the distance of the lasers gradient to show visually how
+                effective each weapon is at a given distance. <br><br>
+
+                The laser also applies a mask to the line renderer to not go beyond the ball if within range.`,
+              details: []
+            }
+          ]
+        }
+      };
+
+      let currentSlide = 0;
+      let slideCount = 0;
+
+      function updateCarousel(slides) {
+        const track = document.getElementById('carousel-track');
+        const dots = document.getElementById('carousel-dots');
+        
+        // Reset carousel
+        track.innerHTML = '';
+        dots.innerHTML = '';
+        currentSlide = 0;
+        slideCount = slides.length;
+
+        // Add images
+        slides.forEach((slide, index) => {
+          const slideDiv = document.createElement('div');
+          slideDiv.className = 'carousel-slide';
+          slideDiv.innerHTML = `<img src="${slide.image}" alt="Project image ${index + 1}">`;
+          track.appendChild(slideDiv);
+
+          // Add dot
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+          dot.onclick = () => goToSlide(index);
+          dots.appendChild(dot);
+        });
+
+        updateSlidePosition();
+      }
+
+      function updateSlidePosition() {
+        const track = document.getElementById('carousel-track');
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        const dots = document.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+
+        // Update button states
+        document.getElementById('carousel-prev').disabled = currentSlide === 0;
+        document.getElementById('carousel-next').disabled = currentSlide === slideCount - 1;
+
+        // Update content for current slide
+        updateSlideContent();
+      }
+
+      function updateSlideContent() {
+        const projectId = document.getElementById('project-overlay').getAttribute('data-current-project');
+        if (!projectId) return;
+
+        const project = projectData[projectId];
+        const currentSlideData = project.slides[currentSlide];
+
+        let content = `<div class="project-description">${currentSlideData.description}</div>`;
+        
+        // Only add details section if there are details to show
+        if (currentSlideData.details && currentSlideData.details.length > 0) {
+          content += '<div class="project-details"><h3>Details</h3><ul>';
+          currentSlideData.details.forEach(detail => {
+            content += `<li>${detail}</li>`;
+          });
+          content += '</ul></div>';
+        }
+        
+        const contentElement = document.getElementById('project-content');
+        contentElement.style.opacity = '0';
+        
+        // Use setTimeout to create a smooth transition
+        setTimeout(() => {
+          contentElement.innerHTML = content;
+          contentElement.style.opacity = '1';
+        }, 200);
+      }
+
+      function nextSlide() {
+        if (currentSlide < slideCount - 1) {
+          currentSlide++;
+          updateSlidePosition();
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlidePosition();
+        }
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateSlidePosition();
+      }
+
+      function openOverlay(projectId) {
+        const project = projectData[projectId];
+        if (!project) return;
+
+        document.getElementById('overlay-title').textContent = project.title;
+        document.getElementById('overlay-subtitle').textContent = project.subtitle;
+        
+        // Store current project ID
+        document.getElementById('project-overlay').setAttribute('data-current-project', projectId);
+        
+        // Update carousel with slides
+        updateCarousel(project.slides);
+        
+        // Show overlay first
+        document.getElementById('project-overlay').classList.add('active');
+        
+        // Then prevent scrolling while maintaining position
+        document.body.style.overflow = 'hidden';
+        document.body.style.paddingRight = '17px'; // Compensate for scrollbar
+
+        // Reset scroll position of overlay
+        document.getElementById('overlay-body').scrollTop = 0;
+      }
+
+      function closeOverlay() {
+        // Hide overlay first
+        document.getElementById('project-overlay').classList.remove('active');
+        
+        // Then restore scrolling
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+
+      // Close overlay when clicking outside content
+      document.getElementById('project-overlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeOverlay();
+        }
+      });
+
+      // Close overlay with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeOverlay();
+        }
+      });
+
+      // Add event listeners for carousel buttons
+      document.getElementById('carousel-prev').addEventListener('click', prevSlide);
+      document.getElementById('carousel-next').addEventListener('click', nextSlide);
+
+      // Add keyboard navigation for carousel
+      document.addEventListener('keydown', function(e) {
+        if (document.getElementById('project-overlay').classList.contains('active')) {
+          if (e.key === 'ArrowLeft') prevSlide();
+          if (e.key === 'ArrowRight') nextSlide();
+        }
+      });
+
+      // Project box template function
+      function createProjectBox(id, project, imageUrl, title, subtitle) {
+        return `
+          <div
+            class="project-box"
+            data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-out"
+            data-aos-delay="900"
+            data-aos-duration="1000"
+          >
+            <div class="project-links">
+              ${project.github ? `
+              <a href="#" onclick="window.open('${project.github}', '_blank'); event.preventDefault();">
+                <img src="assets/icons/github.png" alt="View on GitHub" />
+              </a>
+              ` : ''}
+              ${project.itch ? `
+              <a href="#" onclick="window.open('${project.itch}', '_blank'); event.preventDefault();">
+                <img src="assets/icons/itch.png" alt="View on Itch.io" />
+              </a>
+              ` : ''}
+            </div>
+            <a href="javascript:void(0)" onclick="openOverlay('${id}')">
+              <img class="project-img" src="${imageUrl}" alt="${title}" />
+              <div class="project-mask">
+                <div class="project-caption">
+                  <h5 class="white">${title}</h5>
+                  <p class="white">${subtitle}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        `;
+      }
+
+      // Project configurations
+      const projectConfigs = [
+        {
+          id: 'shaders',
+          imageUrl: 'assets/shaders/outlines.png',
+          title: 'Shader Projects',
+          subtitle: 'Unity, C#, ShaderGraph, HLSL'
+        },
+        {
+          id: 'volleyguns',
+          imageUrl: 'assets/volleyguns/menu.png',
+          title: 'VolleyGuns',
+          subtitle: 'Unity, C#, ShaderGraph, HLSL'
+        },
+        {
+          id: 'freakshow',
+          imageUrl: 'assets/freakshow/freakshow.png',
+          title: 'Freakshow',
+          subtitle: 'Unity, C#, Netcode'
+        },
+        {
+          id: 'dontjump',
+          imageUrl: 'assets/jump/dontjump.png',
+          title: "Don't Press A to Jump",
+          subtitle: 'Playdate SDK, Lua, Aseprite'
+        },
+        {
+          id: 'axolotlquest',
+          imageUrl: 'assets/axolotl/axolotlquest.png',
+          title: 'Super Axolotl Quest: Overdrive',
+          subtitle: 'Unity, C#, Blender'
+        },
+        {
+          id: 'metrofracture',
+          imageUrl: 'assets/metro/metrofracture.png',
+          title: 'Metro Fracture',
+          subtitle: 'Unity, C#, Aseprite'
+        }
+      ];
+
+      // Render all project boxes
+      document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('projects-container');
+        const projectsHtml = projectConfigs.map(config => 
+          createProjectBox(
+            config.id,
+            projectData[config.id],
+            config.imageUrl,
+            config.title,
+            config.subtitle
+          )
+        ).join('');
+        
+        container.innerHTML = projectsHtml;
+      });
+    </script>
+  </body>
+</html>
