@@ -263,7 +263,7 @@ h5 {
   font-family: monospace;
   white-space: pre;
   display: block;
-  font-size: 100%;
+  font-size: 80%;
   line-height: 1.2;
   letter-spacing: 0;
   margin: 0;
@@ -272,19 +272,19 @@ h5 {
 
 @media (max-width: 768px) {
   .ascii-art {
-    font-size: 50%;
+    font-size: 40%;
   }
 }
 
 @media (max-width: 480px) {
   .ascii-art {
-    font-size: 30%;
+    font-size: 20%;
   }
 }
 
 @media (max-width: 320px) {
   .ascii-art {
-    font-size: 20%;
+    font-size: 15%;
   }
 }
 
