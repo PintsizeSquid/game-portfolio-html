@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luc Walz</title>
-    <link rel="shortcut icon" href="assets/icons/lw.png" type="image/x-icon" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/media.css" />
-    <link rel="stylesheet" href="theme.css" />
+    <link rel="shortcut icon" href="assets/icons/lw.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="theme.css">
     <script type="module" src="js/shaderBackground.js"></script>
     <style>
       #project-content {
@@ -157,6 +157,18 @@
       .project-description a:hover {
         opacity: 0.8;
       }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
     </style>
   </head>
 
@@ -193,7 +205,7 @@
                   id="nav-btn-img"
                   src="img/icons/open.svg"
                   alt="Navigation button"
-                />
+                >
               </button>
             </nav>
           </div>
@@ -211,6 +223,7 @@
             data-aos-duration="1000"
           >
             <div class="hero-content">
+              <h1 class="visually-hidden">Luc Walz - Technical Artist & Graphics Programmer</h1>
               <pre class="hero-heading ascii-art">
 ██╗     ██╗   ██╗ ██████╗    ██╗    ██╗ █████╗ ██╗     ███████╗
 ██║     ██║   ██║██╔════╝    ██║    ██║██╔══██╗██║     ╚══███╔╝
@@ -229,7 +242,7 @@
                       alt="My GitHub profile"
                       class="icon" 
                       onclick="window.open('https://github.com/PintsizeSquid', '_blank');"
-                    />
+                    >
                   </a>
 
                   <a href="#!">
@@ -238,7 +251,7 @@
                       alt="My LinkedIn profile"
                       class="icon" 
                       onclick="window.open('https://www.linkedin.com/in/luc-walz-0594232ba/', '_blank');"
-                    />
+                    >
                   </a>
 
                   <a href="#!">
@@ -247,7 +260,7 @@
                       alt="My Itch.io profile"
                       class="icon" 
                       onclick="window.open('https://luc-walz.itch.io/', '_blank');"
-                    />
+                    >
                   </a>
                   
                 </div>
@@ -324,7 +337,7 @@
               data-aos-duration="1000"
               data-aos-delay="50"
             >
-              <img class="service-card-img" src="assets/icons/experience.png" alt="" />
+              <img class="service-card-img" src="assets/icons/experience.png" alt="">
               <h3 class="service-card-title">Game Development</h3>
               <p style="color: #bababa;">
                 Building unique and engaging games using a variety of platforms,
@@ -338,7 +351,7 @@
               data-aos-duration="1000"
               data-aos-delay="500"
             >
-              <img class="service-card-img" src="assets/icons/experience.png" alt="" />
+              <img class="service-card-img" src="assets/icons/experience.png" alt="">
               <h3 class="service-card-title">Technical Art</h3>
               <p style="color: #bababa;">
                 Rendering compelling visuals and experiences taking full control
@@ -352,6 +365,7 @@
       <section id="projects" class="projects">
         <div class="container container-lg">
           <div class="projects-title">
+            <h2 class="visually-hidden">Projects</h2>
             <pre class="title ascii-art">
 ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗███████╗
 ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝██╔════╝
@@ -369,6 +383,7 @@
       <section id="contact" class="contact">
         <div class="container">
           <div class="contact-title">
+            <h2 class="visually-hidden">Contact</h2>
             <pre class="title ascii-art">
  ██████╗ ██████╗ ███╗   ██╗████████╗ █████╗  ██████╗████████╗
 ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔════╝╚══██╔══╝
@@ -399,7 +414,7 @@
                   src="assets/icons/github.png"
                   alt="Link to GitHub account"
                   onclick="window.open('https://github.com/PintsizeSquid', '_blank');"
-                />
+                >
               </a>
 
               <a href="#!">
@@ -407,11 +422,11 @@
                   src="assets/icons/linkedin.png"
                   alt="Link to linkedin profile"
                   onclick="window.open('https://www.linkedin.com/in/luc-walz-0594232ba/', '_blank');"
-                />
+                >
               </a>
 
               <a href="#!">
-                <img src="assets/icons/itch.png" alt="Link to itch.io profile" onclick="window.open('https://luc-walz.itch.io/', '_blank');" />
+                <img src="assets/icons/itch.png" alt="Link to itch.io profile" onclick="window.open('https://luc-walz.itch.io/', '_blank');">
               </a>
             </div>
 
@@ -427,7 +442,7 @@
     <div id="project-overlay" class="project-overlay">
       <div class="project-overlay-content">
         <div class="project-overlay-header">
-          <h2 id="overlay-title"></h2>
+          <h2 id="overlay-title">Project Details</h2>
           <p id="overlay-subtitle"></p>
         </div>
         
