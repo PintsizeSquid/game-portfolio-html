@@ -9,7 +9,7 @@ class ShaderBackground {
         }
 
         this.startTime = Date.now();
-        this.targetPixelHeight = 128;
+        this.targetPixelHeight = 64;
         this.init();
     }
 

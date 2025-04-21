@@ -169,6 +169,10 @@
         white-space: nowrap;
         border: 0;
       }
+
+      .carousel-track {
+        transition: transform 0.5s ease-in-out;
+      }
     </style>
   </head>
 
@@ -752,6 +756,118 @@
 
       let currentSlide = 0;
       let slideCount = 0;
+      let isDragging = false;
+      let startPos = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+      let animationID = 0;
+      let currentIndex = 0;
+
+      function setSliderPosition() {
+        const track = document.getElementById('carousel-track');
+        track.style.transform = `translateX(${currentTranslate}px)`;
+      }
+
+      function animation() {
+        setSliderPosition();
+        if (isDragging) requestAnimationFrame(animation);
+      }
+
+      function touchStart(event) {
+        const track = document.getElementById('carousel-track');
+        if (!track) return;
+        
+        isDragging = true;
+        track.classList.add('dragging');
+        
+        // Get starting position of touch/mouse
+        startPos = event.type.includes('mouse') 
+          ? event.pageX 
+          : event.touches[0].clientX;
+        
+        // Get current slide position
+        const style = window.getComputedStyle(track);
+        const transform = style.transform;
+        const matrix = new DOMMatrix(transform);
+        prevTranslate = matrix.m41;
+        currentTranslate = prevTranslate;
+        
+        // Stop any ongoing transitions
+        track.style.transition = 'none';
+        
+        // Start animation loop
+        cancelAnimationFrame(animationID);
+        animationID = requestAnimationFrame(animation);
+      }
+
+      function touchMove(event) {
+        if (!isDragging) return;
+        
+        // Get current position
+        const currentPosition = event.type.includes('mouse')
+          ? event.pageX
+          : event.touches[0].clientX;
+        
+        // Calculate how far we've moved
+        const currentDistance = currentPosition - startPos;
+        
+        // Update translate
+        currentTranslate = prevTranslate + currentDistance;
+      }
+
+      function touchEnd() {
+        const track = document.getElementById('carousel-track');
+        if (!track) return;
+        
+        isDragging = false;
+        track.classList.remove('dragging');
+        
+        // Calculate which slide we should snap to
+        const movedBy = currentTranslate - prevTranslate;
+        const containerWidth = track.clientWidth;
+        
+        // Calculate how far we've moved as a percentage of the slide width
+        const movePercentage = movedBy / containerWidth;
+        
+        // If moved more than 30% of slide width, move to next/prev slide
+        if (Math.abs(movePercentage) > 0.3) {
+          if (movePercentage < 0 && currentSlide < slideCount - 1) {
+            currentSlide++;
+          } else if (movePercentage > 0 && currentSlide > 0) {
+            currentSlide--;
+          }
+        }
+        
+        // Reset transition and update position
+        track.style.transition = 'transform 0.5s ease-in-out';
+        updateSlidePosition();
+        
+        // Reset transforms to percentage-based position
+        currentTranslate = -currentSlide * containerWidth;
+        prevTranslate = currentTranslate;
+        
+        cancelAnimationFrame(animationID);
+      }
+
+      // Add these event listeners after your carousel initialization
+      function initDragListeners() {
+        const track = document.getElementById('carousel-track');
+        if (!track) return;
+
+        // Touch events
+        track.addEventListener('touchstart', touchStart);
+        track.addEventListener('touchmove', touchMove);
+        track.addEventListener('touchend', touchEnd);
+
+        // Mouse events
+        track.addEventListener('mousedown', touchStart);
+        track.addEventListener('mousemove', touchMove);
+        track.addEventListener('mouseup', touchEnd);
+        track.addEventListener('mouseleave', touchEnd);
+
+        // Prevent context menu on long press
+        track.addEventListener('contextmenu', e => e.preventDefault());
+      }
 
       function updateCarousel(slides) {
         const track = document.getElementById('carousel-track');
@@ -767,7 +883,7 @@
         slides.forEach((slide, index) => {
           const slideDiv = document.createElement('div');
           slideDiv.className = 'carousel-slide';
-          slideDiv.innerHTML = `<img src="${slide.image}" alt="Project image ${index + 1}">`;
+          slideDiv.innerHTML = `<img src="${slide.image}" alt="Project image ${index + 1}" draggable="false">`; // Add draggable="false"
           track.appendChild(slideDiv);
 
           // Add dot
@@ -776,6 +892,9 @@
           dot.onclick = () => goToSlide(index);
           dots.appendChild(dot);
         });
+
+        // Initialize drag listeners
+        initDragListeners();
 
         updateSlidePosition();
       }

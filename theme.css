@@ -221,15 +221,21 @@ h5 {
   padding-top: 90px;
   background-color: transparent;
   overflow: hidden;
+  margin: 0;
+  padding: 90px 0;
+  width: 100vw;
+  height: auto;
 }
 
 #shader-canvas {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   z-index: -1;
+  margin: 0;
+  padding: 0;
 }
 
 .hero-row {
@@ -267,7 +273,7 @@ h5 {
   line-height: 1;
   letter-spacing: 0;
   margin: 0;
-  color: var(--main-text-color);
+  color: var(--white-color);
 }
 
 @media (max-width: 768px) {
@@ -291,6 +297,7 @@ h5 {
 .hero-heading-subtitle {
   font-size: clamp(1.125rem, 1.054rem + 0.36vw, 1.375rem);
   font-weight: 400;
+  color: var(--white-color);
 }
 
 .hero-img {
@@ -953,6 +960,13 @@ img {
   transition: transform 0.5s ease-in-out;
   height: 500px;
   width: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel-track.dragging {
+  transition: none;
+  cursor: grabbing;
 }
 
 .carousel-slide {
