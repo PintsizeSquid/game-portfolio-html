@@ -400,6 +400,24 @@
         </div>
       </section>
 
+      <section id="projects" class="projects">
+        <div class="container container-lg">
+          <div class="projects-title">
+            <h2 class="visually-hidden">Projects</h2>
+            <pre class="title ascii-art">
+██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗███████╗
+██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝██╔════╝
+██████╔╝██████╔╝██║   ██║     ██║█████╗  ██║        ██║   ███████╗
+██╔═══╝ ██╔══██╗██║   ██║██   ██║██╔══╝  ██║        ██║   ╚════██║
+██║     ██║  ██║╚██████╔╝╚█████╔╝███████╗╚██████╗   ██║   ███████║
+╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝   ╚══════╝ </pre>
+          </div>
+          
+          <div id="projects-container" class="projects-row">
+          </div>
+        </div>
+      </section>
+
       <section id="about" class="about">
         <div class="container">
           <div class="about-title">
@@ -458,24 +476,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" class="projects">
-        <div class="container container-lg">
-          <div class="projects-title">
-            <h2 class="visually-hidden">Projects</h2>
-            <pre class="title ascii-art">
-██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗███████╗
-██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝██╔════╝
-██████╔╝██████╔╝██║   ██║     ██║█████╗  ██║        ██║   ███████╗
-██╔═══╝ ██╔══██╗██║   ██║██   ██║██╔══╝  ██║        ██║   ╚════██║
-██║     ██║  ██║╚██████╔╝╚█████╔╝███████╗╚██████╗   ██║   ███████║
-╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝   ╚══════╝</pre>
-          </div>
-          
-          <div id="projects-container" class="projects-row">
           </div>
         </div>
       </section>
@@ -959,7 +959,7 @@
         `;
       }
 
-      const projectOrder = ['shaders', 'volleyguns', 'uhoh', 'dontjump', 'freakshow'];
+      const projectOrder = ['volleyguns', 'uhoh', 'dontjump', 'freakshow', 'shaders'];
 
       document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('projects-container');
