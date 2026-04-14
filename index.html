@@ -10,154 +10,6 @@
     <link rel="stylesheet" href="theme.css">
     <script type="module" src="js/shaderBackground.js"></script>
     <style>
-      #project-content {
-        transition: opacity 0.2s ease-in-out;
-        margin-bottom: 60px;
-      }
-
-      .project-description, .project-details {
-        transition: opacity 0.2s ease-in-out;
-      }
-
-      .project-links {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        display: flex;
-        gap: 20px;
-        z-index: 2;
-      }
-
-      .project-links a {
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 50%;
-        transition: all 0.3s ease;
-      }
-
-      .project-links a:hover {
-        background: rgba(0, 0, 0, 0.9);
-        transform: scale(1.1);
-      }
-
-      .project-links img {
-        width: 32px;
-        height: 32px;
-        filter: invert(100%);
-      }
-
-      .project-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        overflow-y: auto;
-        display: none;
-      }
-
-      .project-overlay.active {
-        display: flex;
-        justify-content: center;
-      }
-
-      .project-overlay-content {
-        width: 90%;
-        max-width: 1200px;
-        margin: 2vh 0;
-        background: var(--bg-color);
-        border-radius: 8px;
-      }
-
-      .project-overlay-header {
-        padding: 15px 20px;
-      }
-
-      .project-overlay-header h2 {
-        margin: 0;
-        margin-bottom: 5px;
-      }
-
-      .project-overlay-header p {
-        margin: 0;
-      }
-
-      .project-overlay-body {
-        padding: 20px;
-        padding-bottom: 60px;
-      }
-
-      .overlay-close-btn-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.8);
-        padding: 10px;
-        text-align: center;
-        backdrop-filter: blur(5px);
-        z-index: 1001;
-      }
-
-      .overlay-close-btn {
-        min-width: 120px;
-        padding: 8px 20px;
-      }
-
-      .carousel-container {
-        max-height: 40vh;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .carousel-slide {
-        flex: 0 0 100%;
-        height: 40vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .carousel-slide img {
-        max-height: 100%;
-        max-width: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-      }
-
-      @media screen and (max-width: 768px) {
-        .carousel-container,
-        .carousel-slide {
-          max-height: 30vh;
-          height: 30vh;
-        }
-      }
-
-      @media screen and (max-width: 480px) {
-        .carousel-container,
-        .carousel-slide {
-          max-height: 25vh;
-          height: 25vh;
-        }
-      }
-
-      .project-description a {
-        color: #4f9d69;
-        text-decoration: none;
-        transition: opacity 0.2s ease;
-      }
-
-      .project-description a:hover {
-        opacity: 0.8;
-      }
-
       .visually-hidden {
         position: absolute;
         width: 1px;
@@ -170,8 +22,276 @@
         border: 0;
       }
 
-      .carousel-track {
+      #projects-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2.5rem;
+        padding: 0 1rem;
+      }
+
+      .project-section {
+        width: 100%;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .project-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 1.5rem 2rem;
+      }
+
+      .project-section-title h3 {
+        margin: 0 0 0.4rem 0;
+        font-size: 1.6rem;
+        color: var(--white-color);
+      }
+
+      .project-tagline {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--primary-accent);
+        font-style: italic;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 12px;
+        flex-shrink: 0;
+        margin-left: 1.5rem;
+      }
+
+      .project-links a {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .project-links a:hover {
+        background: rgba(0, 0, 0, 0.85);
+        transform: scale(1.1);
+      }
+
+      .project-links img {
+        width: 28px;
+        height: 28px;
+        filter: invert(100%);
+      }
+
+      .project-section-body {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 2rem;
+        padding: 0 2rem 2rem;
+      }
+
+      .project-static-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--supportive-text-color);
+      }
+
+      .project-static-description p {
+        margin: 0 0 1rem 0;
+      }
+
+      .project-static-description p:last-child {
+        margin-bottom: 0;
+      }
+
+      .project-detail-list {
+        margin: 0.75rem 0 0 0;
+        padding-left: 0;
+        list-style: none;
+        color: var(--supportive-text-color);
+      }
+
+      .project-detail-list li {
+        margin-bottom: 0.4rem;
+        line-height: 1.6;
+        position: relative;
+        padding-left: 1.1rem;
+      }
+
+      .project-detail-list li::before {
+        content: "•";
+        color: var(--primary-accent);
+        position: absolute;
+        left: 0;
+      }
+
+      .project-carousel-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .inline-carousel-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #000;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+
+      .inline-carousel-track {
+        display: flex;
+        height: 100%;
+        width: 100%;
         transition: transform 0.5s ease-in-out;
+        cursor: grab;
+        user-select: none;
+      }
+
+      .inline-carousel-track.dragging {
+        transition: none;
+        cursor: grabbing;
+      }
+
+      .inline-carousel-slide {
+        flex: 0 0 100%;
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .inline-carousel-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        pointer-events: none;
+        -webkit-user-drag: none;
+      }
+
+      .inline-carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+        z-index: 2;
+      }
+
+      .inline-carousel-button:hover {
+        background: rgba(0, 0, 0, 0.85);
+      }
+
+      .inline-carousel-button:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+
+      .inline-carousel-button.prev { left: 8px; }
+      .inline-carousel-button.next { right: 8px; }
+
+      .inline-carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .inline-carousel-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.3s ease;
+      }
+
+      .inline-carousel-dot:hover {
+        background: rgba(255, 255, 255, 0.6);
+      }
+
+      .inline-carousel-dot.active {
+        background: var(--primary-accent);
+        transform: scale(1.3);
+      }
+
+      .inline-carousel-caption {
+        margin-top: 1rem;
+        min-height: 3.5rem;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        color: var(--supportive-text-color);
+        transition: opacity 0.15s ease;
+      }
+
+      .inline-carousel-caption a {
+        color: var(--primary-accent);
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .inline-carousel-caption a:hover {
+        opacity: 0.8;
+      }
+
+      .caption-details {
+        margin: 0.6rem 0 0 0;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .caption-details li {
+        margin-bottom: 0.3rem;
+        padding-left: 1.1rem;
+        position: relative;
+      }
+
+      .caption-details li::before {
+        content: "•";
+        color: var(--primary-accent);
+        position: absolute;
+        left: 0;
+      }
+
+      @media screen and (max-width: 960px) {
+        .project-section-body {
+          grid-template-columns: 1fr;
+        }
+        .project-carousel-column {
+          order: -1;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .project-section-header {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.2rem;
+        }
+        .project-section-body {
+          padding: 0 1.2rem 1.2rem;
+        }
+        .project-links {
+          margin-left: 0;
+        }
       }
     </style>
   </head>
@@ -227,7 +347,7 @@
             data-aos-duration="1000"
           >
             <div class="hero-content">
-              <h1 class="visually-hidden">Luc Walz - Technical Artist & Graphics Programmer</h1>
+              <h1 class="visually-hidden">Luc Walz - Technical Artist | Graphics Programmer | Game Developer</h1>
               <pre class="hero-heading ascii-art">
 ██╗     ██╗   ██╗ ██████╗    ██╗    ██╗ █████╗ ██╗     ███████╗
 ██║     ██║   ██║██╔════╝    ██║    ██║██╔══██╗██║     ╚══███╔╝
@@ -236,7 +356,7 @@
 ███████╗╚██████╔╝╚██████╗    ╚███╔███╔╝██║  ██║███████╗███████╗
 ╚══════╝ ╚═════╝  ╚═════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝</pre>
               <span class="hero-heading-subtitle"
-                >Technical Artist & Graphics Programmer</span
+                >Technical Artist | Graphics Programmer | Game Developer</span
               >
               <div class="about-social-list">
                 <div class="social-links-row">
@@ -295,7 +415,7 @@
             <div class="about-image"
               data-aos="fade-up"
               data-aos-duration="1000">
-              <img src="assets/profile/profile-pic.png" alt="Luc Walz headshot" class="headshot-img">
+              <img src="assets/profile/walking.jpg" alt="Luc Walz headshot" class="headshot-img">
             </div>
             <div
               class="about-content"
@@ -303,10 +423,15 @@
               data-aos-duration="1000"
             >
               <p class="about-descr">
-                Hi, I'm Luc Walz, a game programmer and technical artist.
-                I'm a recent graduate of Michigan State University with 
-                a Bachelor's of Engineering in Computer Science and have found 
-                a love for creating unique visuals in games.
+                I'm a graphics and game programmer with a passion for creating unique visuals.
+                I studied at Michigan State University and graduated with 
+                a Bachelor's of Engineering in Computer Science.
+                <br><br>
+                Outside of work, I love to cook, sail, hike and climb. Of course I also enjoy
+                playing video games!
+                <br><br>
+                This portfolio shows various projects I'm working on or have worked on.
+                I'm constantly updating it with new content and project updates.
               </p>
             </div>
             <div
@@ -320,6 +445,10 @@
                 <div class="skill-bar__progress"></div>
               </div>
               <div class="skill">
+                <div class="skill-title">GDScript</div>
+                <div class="skill-bar__progress"></div>
+              </div>
+              <div class="skill">
                 <div class="skill-title">Lua</div>
                 <div class="skill-bar__progress"></div>
               </div>
@@ -328,39 +457,6 @@
                 <div class="skill-bar__progress">
                 </div>
               </div>
-              <div class="skill">
-                <div class="skill-title">HTML/CSS</div>
-                <div class="skill-bar__progress"></div>
-              </div>
-            </div>
-          </div>
-          <div class="services-row">
-            <div
-              class="service-card"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="50"
-            >
-              <img class="service-card-img" src="assets/icons/experience.png" alt="">
-              <h3 class="service-card-title">Game Development</h3>
-              <p style="color: #bababa;">
-                Building unique and engaging games using a variety of platforms,
-                including Unity, Godot, and the Playdate SDK.
-              </p>
-            </div>
-
-            <div
-              class="service-card"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay="500"
-            >
-              <img class="service-card-img" src="assets/icons/experience.png" alt="">
-              <h3 class="service-card-title">Technical Art</h3>
-              <p style="color: #bababa;">
-                Rendering compelling visuals and experiences taking full control
-                of the rendering pipeline.
-              </p>
             </div>
           </div>
         </div>
@@ -440,37 +536,6 @@
           </div>
         </div>
       </footer>
-    </div>
-
-    <!-- Project Overlay -->
-    <div id="project-overlay" class="project-overlay">
-      <div class="project-overlay-content">
-        <div class="project-overlay-header">
-          <h2 id="overlay-title">Project Details</h2>
-          <p id="overlay-subtitle"></p>
-        </div>
-        
-        <div class="project-overlay-body" id="overlay-body">
-          <!-- Carousel will be inserted here -->
-          <div class="carousel-container">
-            <div class="carousel-track" id="carousel-track">
-              <!-- Images will be inserted here -->
-            </div>
-            <button class="carousel-button prev" id="carousel-prev">❮</button>
-            <button class="carousel-button next" id="carousel-next">❯</button>
-            <div class="carousel-dots" id="carousel-dots">
-              <!-- Dots will be inserted here -->
-            </div>
-          </div>
-
-          <!-- Project content will be inserted here -->
-          <div id="project-content"></div>
-        </div>
-        
-        <div class="overlay-close-btn-container">
-          <button class="overlay-close-btn" onclick="closeOverlay()">Close</button>
-        </div>
-      </div>
     </div>
 
     <script>
@@ -556,9 +621,9 @@
                 Playdate handheld console.<br><br>
                 
                 Propel yourself over stormy seas, casting fireballs to gain momentum. Careful not to run
-                out of charges, you can jump to stop your fall, but risk increasing your bad luck. As
+                out of charges, you can jump to stop your fall, but risk giving yourself bad luck. As
                 bad luck increases, so do enemy spawns and the the strength of the storms. Hopefully you
-                don't have any metal on you...`,
+                aren't wearing anything metal...`,
               details: [
                 'Developed for Playdate\'s unique hardware features using the Playdate SDK',
                 'Created from scratch in Lua in ~1 month of development',
@@ -567,84 +632,12 @@
             },
             {
               image: 'assets/jump/flight.png',
-              description: 'Catch an albatross to glide across the stormy seas, conserving your limited resources!',
+              description: 'Catching an albatross allows you to glide across the stormy seas, conserving your limited resources. Use the PlayDate\'s crank to control the albatross\'s altitude.',
               details: []
             },
             {
               image: 'assets/jump/lost.png',
-              description: 'Try your best to beat your high score!',
-              details: []
-            }
-          ]
-        },
-        'axolotlquest': {
-          title: 'Super Axolotl Quest: Overdrive',
-          subtitle: 'A buggy, yet strikingly realistic simulator of my axolotl, Noodles',
-          github: 'https://github.com/PintsizeSquid/Super-Axolotl-Quest-Overdrive',
-          itch: 'https://luc-walz.itch.io/super-axolotl-quest-overdrive',
-          slides: [
-            {
-              image: 'assets/axolotl/swimming.png',
-              description: `Super Axolotl Quest: Overdrive is a small side project I built in
-                Unity 3D to teach myself the basics of 3D modeling and animation in Blender.<br><br>
-                
-                Live the live of Noodles the axolotl, kicking back in your tank and tossing marbles.
-                The movement is very buggy and poorly implemented, but surprisingly the way Noodles moves is very
-                similar to how he does in real life.`,
-              details: [
-                'Modeled, rigged, and animated Noodles in Blender',
-                'Modeled and textured the tank and room environment',
-                'Created from scratch in ~1 week of development'
-              ]
-            },
-            {
-              image: 'assets/axolotl/cave.png',
-              description: 'Hang out in your cave!',
-              details: []
-            },
-            {
-              image: 'assets/axolotl/marble.png',
-              description: 'Push marbles around to your heart\'s content!',
-              details: []
-            }
-          ]
-        },
-        'metrofracture': {
-          title: 'Metro Fracture',
-          subtitle: 'A 2D brawler through an endless subway',
-          itch: 'https://luc-walz.itch.io/metro-fracture',
-          slides: [
-            {
-              image: 'assets/metro/metrofracture.png',
-              description: `Metro Fracture is a 2D Unity game made as a final project for a game programming 
-                course at Michigan State University.<br><br>
-                
-                Fight through infinitely looping subway cars filled with humanoid monsters! With a light and heavy punch,
-                shin kick, and headbutt, you can take down your foes. Make sure to block or duck when they attack back!`,
-              details: [
-                'Created custom pixel sprites and animations for the 4 unique characters',
-                'Created a player controller with fluid movement, attacks, and animations',
-                'All art, animations, and programming were made for this project in 4 weeks'
-              ]
-            },
-            {
-              image: 'assets/metro/hitter.png',
-              description: 'Careful not to get hit!',
-              details: []
-            },
-            {
-              image: 'assets/metro/grabber.png',
-              description: 'The grabber has range, but is a bit tall. Go for the shins!',
-              details: []
-            },
-            {
-              image: 'assets/metro/martyrdog.png',
-              description: 'The martyrdog is quick to pounce! Make sure to duck or block!',
-              details: []
-            },
-            {
-              image: 'assets/metro/gameover.png',
-              description: 'Careful not to crack!',
+              description: 'Try your best to beat your high score before falling into the sea!',
               details: []
             }
           ]
@@ -654,75 +647,79 @@
           subtitle: 'A collection of custom shaders I have been playing around with',
           slides: [
             {
-              image: 'assets/shaders/outlines.png',
-              description: `This is a collection of custom shaders I have been experimenting with
-                in Unity 6 and other engines. I may make this a page on its own in the future, with
-                code snippets explaining my process and the math behind the shaders.<br><br>
-              
-                Above is a snippet of a sobel edge detection filter I made in Unity's ShaderGraph.
-                I'll be using this filter to build further effects from.`,
-              details: []
-            },
-            {
-              image: 'assets/shaders/pixelizedoutlines.png',
-              description: `Here is a continuation on the sobel edge detection filter, 
-                where I aimed to replicate the 3D pixel art effect <a href="https://imgur.com/gallery/creating-pixel-art-scene-realtime-3d-qwhbHQq" target="_blank">t3ssl8r</a> is known for.<br><br>
-
-                I have the depth outlines drawn red and the edge outlines drawn blue for clarity.`,
-              details: []
-            },
-            {
-              image: 'assets/shaders/dither.gif',
-              description: `Here I take the pixelation and pixel-perfect outlines even further,
-                applying a dither pattern to create a classic, more organic look.<br><br>
-
-                The dither pattern drawn over the whole texture, adjusting density based on
-                pixel luminance. I think it turned out really well, and plan to add color mapping
-                in the future to solidify the retro feel.`,
-              details: []
-            },
-            {
               image: 'assets/shaders/ascii-outlines.gif',
-              description: `Here's something I've been playing around with recently.
-                I've been trying to create a cyber-space ASCII rendered effect after seeing
-                <a href="https://www.youtube.com/@Acerola_t" target="_blank">Acerola's</a> 
-                video on the subject.`,
+              description: `Between Unity and Godot, I take time to create or recreate shaders I find interesting. 
+              In the future I plan to make this it's own page, featuring code snippets explaining my process 
+              and the techniques behind the each effect.`,
               details: []
             },
             {
               image: 'assets/shaders/ascii-burnt.gif',
-              description: `I took it a step further and added a transition effect, where ASCII characters
-                pour down the screen like a digital rain. Feels like entering the Matrix.`,
+              description: `My attempt at creating a cyber-space ASCII rendered effect after seeing
+              <a href="https://www.youtube.com/@Acerola_t" target="_blank">Acerola's</a> 
+              video on the subject. I took it a step further and added a transition effect, where ASCII characters
+              pour down the screen like a digital rain. Feels like entering the Matrix. I'd like to use this in a future project
+              inspired by William Gibson's Neuromancer trilogy.`,
+              details: []
+            },
+            {
+              image: 'assets/shaders/outlines.png',
+              description: `A simple sobel edge detection filter, I used parts of this in the previous ASCII shader, 
+              though in this case I had something else in mind.`,
+              details: []
+            },
+            {
+              image: 'assets/shaders/pixelizedoutlines.png',
+              description: `This was part of my attempt to replicate the 3D pixel art effect
+              <a href="https://imgur.com/gallery/creating-pixel-art-scene-realtime-3d-qwhbHQq" target="_blank">t3ssl8r</a> is known for. 
+              Pixelating the screen and bringing in the outlines make for a nice, retro effect. The depth outlines are drawn red and the edge outlines are drawn blue for clarity.`,
+              details: []
+            },
+            {
+              image: 'assets/shaders/dither.gif',
+              description: `Adding a dither pattern with density based on pixel luminance, it's almost there.
+              The last piece of the puzzle was adding color mapping to solidify the retro feel.`,
               details: []
             }
           ]
         },
         'volleyguns': {
           title: 'VolleyGuns',
-          subtitle: 'A local multiplayer game for 2-4 players witha new way to hit the ball... guns!',
+          subtitle: 'A local multiplayer game for 2-4 players with a new way to hit the ball... guns!',
+          steam: 'https://store.steampowered.com/app/3952510/Volley_Guns/',
           slides: [
             {
               image: 'assets/volleyguns/menu.png',
               description: `VolleyGuns is a stylized local multiplayer game that emphasizes unique
-                visuals reminiscent of games like Jet Set: Radio with cel-shaded graphics and 
+                style reminiscent of games like Jet Set: Radio with cel-shaded graphics and 
                 screen-space outlines.<br><br>
               
                 I had the opportunity to create a handful of shaders and visual effects for this project,
-                joining forces with friends in Game Development at Michigan State University.
-                This game is part of their final course, and we built the game from the ground up over
-                the course of a 4 month semester.`,
+                joining about 12 other students in Game Development at Michigan State University.
+                This game is part of their capstone course, and we built the game from the ground up over
+                the course of a 4 month semester.<br><br>
+                
+                Some effects I created:`,
               details: [
-                'Created screen-space outlines and cel-shaded effects',
-                'Created separate player outlines, uniquely colored for each player',
-                'Created a custom VFX for the ball, exploding into a burst of paint when popped',
-                'Created a barrier shader to show the courts invisible boundaries',
-                'Created a gradient laser effect so players could see their weapons damage effectiveness over distance'
+                'A screen-wide shockwave effect & bullet time mechanic',
+                'Screen-space outlines applied to specific object layers',
+                'Separate player outlines, uniquely colored per team',
+                'Water shaders for different environments',
+                'Various VFX and miscellaneous shaders for item effects'
               ]
             },
             {
-              image: 'assets/volleyguns/toonoutline.png',
-              description: `This screenshot from the game captures the background environment. But highlights 
-                the cel-shaded effect and screen-space outlines I created for the game.`,
+              image: 'assets/volleyguns/shockwave.gif',
+              description: `The screen-wide shockwave effect & bullet time mechanic. If a rally has gone on long enough,
+              and the ball is received at a high enough speed, a shockwave will emit from the ball and the world will slow down.
+              The players can move freely, and any shots fired into the ball will store momentum within it. When bullet-time ends,
+              the shockwave recedes and the ball will launch off in the direction of the last shot fired.`,
+              details: []
+            },
+            {
+              image: 'assets/volleyguns/environment.jpg',
+              description: `A view of VolleyGuns'background environment, Highlighting
+                the cel-shaded objects and screen-space outlines I created for the game.`,
               details: []
             },
             {
@@ -730,402 +727,244 @@
               description: `Each player, when joining a controller, gets assigned a color. This color is used
                 in creating that player's own personal outline, which is used to identify them on the court.<br><br>
 
-                The screen-space outlines ignore the player's layer as to not stack multiple outlines, and these are drawn
-                using the inverse-hull method on the player's mesh. This allows for a bold outline that is easily visible by
-                the players. It also helps that we assign the player's shadow that same color.`,
+                The screen-space outlines ignore the player's layer as to not stack multiple outlines, and these player outlines are done with a Fresnel effect.
+                This allows for a bold outline that is easily visible by the players.`,
+              details: []
+            }
+          ]
+        },
+        'uhoh': {
+          title: 'Uh Oh',
+          subtitle: 'A 3D, first-person horror experience with puzzle solving and a dark atmosphere',
+          steam: 'https://store.steampowered.com/app/4046950/Uh_Oh/',
+          slides: [
+            {
+              image: 'assets/uhoh/opening.jpg',
+              description: `Uh Oh is a short horror experience I helped build with Wumbo Workshop.
+              Exploring an abandoned experimentation facility to confront a hidden evil.
+              <br><br>
+              For this game I purely focused on shader effects and lighting.`,
+              details: [
+                'Volumetric fog post-processing effect in Unity URP',
+                'Composite grass shader for the environment'
+              ]
+            },
+            {
+              image: 'assets/uhoh/rays.jpg',
+              description: ``,
               details: []
             },
             {
-              image: 'assets/volleyguns/ball.gif',
-              description: `In VolleyGuns, our ball has a durability to it. When hit by a player's weapon,
-                the ball will take damage and eventually pop, creating a splash of color around the court.<br><br>
-
-                The ball gains back some durability when crossing the net, creating a sort of hot-potato mechanic as
-                players try to keep the ball in play.`,
-              details: []
-            },
-            {
-              image: 'assets/volleyguns/barrier.gif',
-              description: `As the ball is hit, it may bounce off of invisible boundaries that fall around the court.
-                To show that there is a boundary, I created a shader that leaves behind an imprint on the barrier as 
-                the ball bounces off of it.`,
-              details: []
-            },
-            {
-              image: 'assets/volleyguns/laser.png',
-              description: `Each player has a laser pointer emitting from the barrel of their selected weapon.
-                A core mechanic of volleyguns is that a players shots always hit the ball, so the game becomes one
-                of positioning and timing. <br><br>
-
-                The laser is a line renderer with a shader material applied. Each weapon has set effectiveness values
-                based on distance. So using this, I change the distance of the lasers gradient to show visually how
-                effective each weapon is at a given distance. <br><br>
-
-                The laser also applies a mask to the line renderer to not go beyond the ball if within range.`,
+              image: 'assets/uhoh/elevator.jpg',
+              description: ``,
               details: []
             }
           ]
         }
       };
 
-      let currentSlide = 0;
-      let slideCount = 0;
-      let isDragging = false;
-      let startPos = 0;
-      let currentTranslate = 0;
-      let prevTranslate = 0;
-      let animationID = 0;
-      let currentIndex = 0;
+      // Per-carousel state map
+      const carousels = {};
 
-      function setSliderPosition() {
-        const track = document.getElementById('carousel-track');
-        track.style.transform = `translateX(${currentTranslate}px)`;
-      }
+      function initCarousel(projectId) {
+        const slides = projectData[projectId].slides;
+        carousels[projectId] = {
+          currentSlide: 0,
+          slideCount: slides.length,
+          isDragging: false,
+          startPos: 0,
+          currentTranslate: 0,
+          prevTranslate: 0,
+          animationID: 0
+        };
 
-      function animation() {
-        setSliderPosition();
-        if (isDragging) requestAnimationFrame(animation);
-      }
+        const track = document.getElementById(`carousel-track-${projectId}`);
+        const dotsEl = document.getElementById(`carousel-dots-${projectId}`);
 
-      function touchStart(event) {
-        const track = document.getElementById('carousel-track');
-        if (!track) return;
-        
-        isDragging = true;
-        track.classList.add('dragging');
-        
-        // Get starting position of touch/mouse
-        startPos = event.type.includes('mouse') 
-          ? event.pageX 
-          : event.touches[0].clientX;
-        
-        // Get current slide position
-        const style = window.getComputedStyle(track);
-        const transform = style.transform;
-        const matrix = new DOMMatrix(transform);
-        prevTranslate = matrix.m41;
-        currentTranslate = prevTranslate;
-        
-        // Stop any ongoing transitions
-        track.style.transition = 'none';
-        
-        // Start animation loop
-        cancelAnimationFrame(animationID);
-        animationID = requestAnimationFrame(animation);
-      }
-
-      function touchMove(event) {
-        if (!isDragging) return;
-        
-        // Get current position
-        const currentPosition = event.type.includes('mouse')
-          ? event.pageX
-          : event.touches[0].clientX;
-        
-        // Calculate how far we've moved
-        const currentDistance = currentPosition - startPos;
-        
-        // Update translate
-        currentTranslate = prevTranslate + currentDistance;
-      }
-
-      function touchEnd() {
-        const track = document.getElementById('carousel-track');
-        if (!track) return;
-        
-        isDragging = false;
-        track.classList.remove('dragging');
-        
-        // Calculate which slide we should snap to
-        const movedBy = currentTranslate - prevTranslate;
-        const containerWidth = track.clientWidth;
-        
-        // Calculate how far we've moved as a percentage of the slide width
-        const movePercentage = movedBy / containerWidth;
-        
-        // If moved more than 30% of slide width, move to next/prev slide
-        if (Math.abs(movePercentage) > 0.3) {
-          if (movePercentage < 0 && currentSlide < slideCount - 1) {
-            currentSlide++;
-          } else if (movePercentage > 0 && currentSlide > 0) {
-            currentSlide--;
-          }
-        }
-        
-        // Reset transition and update position
-        track.style.transition = 'transform 0.5s ease-in-out';
-        updateSlidePosition();
-        
-        // Reset transforms to percentage-based position
-        currentTranslate = -currentSlide * containerWidth;
-        prevTranslate = currentTranslate;
-        
-        cancelAnimationFrame(animationID);
-      }
-
-      // Add these event listeners after your carousel initialization
-      function initDragListeners() {
-        const track = document.getElementById('carousel-track');
-        if (!track) return;
-
-        // Touch events
-        track.addEventListener('touchstart', touchStart);
-        track.addEventListener('touchmove', touchMove);
-        track.addEventListener('touchend', touchEnd);
-
-        // Mouse events
-        track.addEventListener('mousedown', touchStart);
-        track.addEventListener('mousemove', touchMove);
-        track.addEventListener('mouseup', touchEnd);
-        track.addEventListener('mouseleave', touchEnd);
-
-        // Prevent context menu on long press
-        track.addEventListener('contextmenu', e => e.preventDefault());
-      }
-
-      function updateCarousel(slides) {
-        const track = document.getElementById('carousel-track');
-        const dots = document.getElementById('carousel-dots');
-        
-        // Reset carousel
-        track.innerHTML = '';
-        dots.innerHTML = '';
-        currentSlide = 0;
-        slideCount = slides.length;
-
-        // Add images
-        slides.forEach((slide, index) => {
+        slides.forEach((slide, i) => {
           const slideDiv = document.createElement('div');
-          slideDiv.className = 'carousel-slide';
-          slideDiv.innerHTML = `<img src="${slide.image}" alt="Project image ${index + 1}" draggable="false">`; // Add draggable="false"
+          slideDiv.className = 'inline-carousel-slide';
+          slideDiv.innerHTML = `<img src="${slide.image}" alt="Project image ${i + 1}" draggable="false">`;
           track.appendChild(slideDiv);
 
-          // Add dot
           const dot = document.createElement('button');
-          dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
-          dot.onclick = () => goToSlide(index);
-          dots.appendChild(dot);
+          dot.className = 'inline-carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.addEventListener('click', () => goToSlide(projectId, i));
+          dotsEl.appendChild(dot);
         });
 
-        // Initialize drag listeners
-        initDragListeners();
+        document.getElementById(`carousel-prev-${projectId}`).addEventListener('click', () => prevSlide(projectId));
+        document.getElementById(`carousel-next-${projectId}`).addEventListener('click', () => nextSlide(projectId));
 
-        updateSlidePosition();
+        track.addEventListener('touchstart', e => touchStart(e, projectId), { passive: true });
+        track.addEventListener('touchmove', e => touchMove(e, projectId), { passive: false });
+        track.addEventListener('touchend', () => touchEnd(projectId));
+        track.addEventListener('mousedown', e => touchStart(e, projectId));
+        track.addEventListener('mousemove', e => touchMove(e, projectId));
+        track.addEventListener('mouseup', () => touchEnd(projectId));
+        track.addEventListener('mouseleave', () => { if (carousels[projectId].isDragging) touchEnd(projectId); });
+        track.addEventListener('contextmenu', e => e.preventDefault());
+
+        updateSlidePosition(projectId);
       }
 
-      function updateSlidePosition() {
-        const track = document.getElementById('carousel-track');
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-        // Update dots
-        const dots = document.querySelectorAll('.carousel-dot');
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentSlide);
-        });
-
-        // Update button states
-        document.getElementById('carousel-prev').disabled = currentSlide === 0;
-        document.getElementById('carousel-next').disabled = currentSlide === slideCount - 1;
-
-        // Update content for current slide
-        updateSlideContent();
+      function animationLoop(projectId) {
+        const state = carousels[projectId];
+        const track = document.getElementById(`carousel-track-${projectId}`);
+        if (track) track.style.transform = `translateX(${state.currentTranslate}px)`;
+        if (state.isDragging) state.animationID = requestAnimationFrame(() => animationLoop(projectId));
       }
 
-      function updateSlideContent() {
-        const projectId = document.getElementById('project-overlay').getAttribute('data-current-project');
-        if (!projectId) return;
+      function touchStart(event, projectId) {
+        const state = carousels[projectId];
+        const track = document.getElementById(`carousel-track-${projectId}`);
+        if (!track) return;
+        state.isDragging = true;
+        track.classList.add('dragging');
+        state.startPos = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        const matrix = new DOMMatrix(window.getComputedStyle(track).transform);
+        state.prevTranslate = matrix.m41;
+        state.currentTranslate = state.prevTranslate;
+        track.style.transition = 'none';
+        cancelAnimationFrame(state.animationID);
+        state.animationID = requestAnimationFrame(() => animationLoop(projectId));
+      }
 
-        const project = projectData[projectId];
-        const currentSlideData = project.slides[currentSlide];
+      function touchMove(event, projectId) {
+        const state = carousels[projectId];
+        if (!state.isDragging) return;
+        if (event.cancelable) event.preventDefault();
+        const pos = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        state.currentTranslate = state.prevTranslate + (pos - state.startPos);
+      }
 
-        let content = `<div class="project-description">${currentSlideData.description}</div>`;
-        
-        // Only add details section if there are details to show
-        if (currentSlideData.details && currentSlideData.details.length > 0) {
-          content += '<div class="project-details"><h3>Details</h3><ul>';
-          currentSlideData.details.forEach(detail => {
-            content += `<li>${detail}</li>`;
-          });
-          content += '</ul></div>';
+      function touchEnd(projectId) {
+        const state = carousels[projectId];
+        if (!state.isDragging) return;
+        const track = document.getElementById(`carousel-track-${projectId}`);
+        if (!track) return;
+        state.isDragging = false;
+        track.classList.remove('dragging');
+        const movedBy = state.currentTranslate - state.prevTranslate;
+        const pct = movedBy / track.clientWidth;
+        if (Math.abs(pct) > 0.3) {
+          if (pct < 0 && state.currentSlide < state.slideCount - 1) state.currentSlide++;
+          else if (pct > 0 && state.currentSlide > 0) state.currentSlide--;
         }
-        
-        const contentElement = document.getElementById('project-content');
-        contentElement.style.opacity = '0';
-        
-        // Use setTimeout to create a smooth transition
+        track.style.transition = 'transform 0.5s ease-in-out';
+        updateSlidePosition(projectId);
+        state.currentTranslate = -state.currentSlide * track.clientWidth;
+        state.prevTranslate = state.currentTranslate;
+        cancelAnimationFrame(state.animationID);
+      }
+
+      function updateSlidePosition(projectId) {
+        const state = carousels[projectId];
+        const track = document.getElementById(`carousel-track-${projectId}`);
+        if (!track) return;
+        track.style.transform = `translateX(-${state.currentSlide * 100}%)`;
+        document.querySelectorAll(`#carousel-dots-${projectId} .inline-carousel-dot`).forEach((dot, i) => {
+          dot.classList.toggle('active', i === state.currentSlide);
+        });
+        document.getElementById(`carousel-prev-${projectId}`).disabled = state.currentSlide === 0;
+        document.getElementById(`carousel-next-${projectId}`).disabled = state.currentSlide === state.slideCount - 1;
+        updateCaption(projectId);
+      }
+
+      function updateCaption(projectId) {
+        const state = carousels[projectId];
+        const caption = document.getElementById(`carousel-caption-${projectId}`);
+        if (!caption) return;
+        // Slide 0's description is already shown in the static description column
+        if (state.currentSlide === 0) {
+          caption.style.opacity = '0';
+          setTimeout(() => { caption.innerHTML = ''; }, 150);
+          return;
+        }
+        const slide = projectData[projectId].slides[state.currentSlide];
+        caption.style.opacity = '0';
         setTimeout(() => {
-          contentElement.innerHTML = content;
-          contentElement.style.opacity = '1';
-        }, 200);
+          let html = slide.description;
+          if (slide.details && slide.details.length > 0) {
+            html += '<ul class="caption-details">';
+            slide.details.forEach(d => { html += `<li>${d}</li>`; });
+            html += '</ul>';
+          }
+          caption.innerHTML = html;
+          caption.style.opacity = '1';
+        }, 150);
       }
 
-      function nextSlide() {
-        if (currentSlide < slideCount - 1) {
-          currentSlide++;
-          updateSlidePosition();
+      function nextSlide(projectId) {
+        const state = carousels[projectId];
+        if (state.currentSlide < state.slideCount - 1) {
+          state.currentSlide++;
+          updateSlidePosition(projectId);
         }
       }
 
-      function prevSlide() {
-        if (currentSlide > 0) {
-          currentSlide--;
-          updateSlidePosition();
+      function prevSlide(projectId) {
+        const state = carousels[projectId];
+        if (state.currentSlide > 0) {
+          state.currentSlide--;
+          updateSlidePosition(projectId);
         }
       }
 
-      function goToSlide(index) {
-        currentSlide = index;
-        updateSlidePosition();
+      function goToSlide(projectId, index) {
+        carousels[projectId].currentSlide = index;
+        updateSlidePosition(projectId);
       }
 
-      function openOverlay(projectId) {
-        const project = projectData[projectId];
-        if (!project) return;
-
-        document.getElementById('overlay-title').textContent = project.title;
-        document.getElementById('overlay-subtitle').textContent = project.subtitle;
-        
-        // Store current project ID
-        document.getElementById('project-overlay').setAttribute('data-current-project', projectId);
-        
-        // Update carousel with slides
-        updateCarousel(project.slides);
-        
-        // Show overlay first
-        document.getElementById('project-overlay').classList.add('active');
-        
-        // Then prevent scrolling while maintaining position
-        document.body.style.overflow = 'hidden';
-        document.body.style.paddingRight = '17px'; // Compensate for scrollbar
-
-        // Reset scroll position of overlay
-        document.getElementById('overlay-body').scrollTop = 0;
-      }
-
-      function closeOverlay() {
-        // Hide overlay first
-        document.getElementById('project-overlay').classList.remove('active');
-        
-        // Then restore scrolling
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
-      }
-
-      // Close overlay when clicking outside content
-      document.getElementById('project-overlay').addEventListener('click', function(e) {
-        if (e.target === this) {
-          closeOverlay();
+      function createProjectSection(id, project) {
+        const firstSlide = project.slides[0];
+        let staticHtml = firstSlide.description;
+        if (firstSlide.details && firstSlide.details.length > 0) {
+          staticHtml += '<ul class="project-detail-list">';
+          firstSlide.details.forEach(d => { staticHtml += `<li>${d}</li>`; });
+          staticHtml += '</ul>';
         }
-      });
 
-      // Close overlay with Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closeOverlay();
-        }
-      });
+        const linksHtml = [
+          project.github ? `<a href="#" onclick="window.open('${project.github}', '_blank'); event.preventDefault();" aria-label="View on GitHub"><img src="assets/icons/github.png" alt="GitHub" /></a>` : '',
+          project.itch ? `<a href="#" onclick="window.open('${project.itch}', '_blank'); event.preventDefault();" aria-label="View on Itch.io"><img src="assets/icons/itch.png" alt="Itch.io" /></a>` : '',
+          project.steam ? `<a href="#" onclick="window.open('${project.steam}', '_blank'); event.preventDefault();" aria-label="View on Steam"><img src="assets/icons/steam.png" alt="Steam" /></a>` : ''
+        ].join('');
 
-      // Add event listeners for carousel buttons
-      document.getElementById('carousel-prev').addEventListener('click', prevSlide);
-      document.getElementById('carousel-next').addEventListener('click', nextSlide);
-
-      // Add keyboard navigation for carousel
-      document.addEventListener('keydown', function(e) {
-        if (document.getElementById('project-overlay').classList.contains('active')) {
-          if (e.key === 'ArrowLeft') prevSlide();
-          if (e.key === 'ArrowRight') nextSlide();
-        }
-      });
-
-      // Project box template function
-      function createProjectBox(id, project, imageUrl, title, subtitle) {
         return `
-          <div
-            class="project-box"
-            data-aos="fade-zoom-in"
-            data-aos-easing="ease-in-out"
-            data-aos-delay="900"
-            data-aos-duration="1000"
-          >
-            <div class="project-links">
-              ${project.github ? `
-              <a href="#" onclick="window.open('${project.github}', '_blank'); event.preventDefault();">
-                <img src="assets/icons/github.png" alt="View on GitHub" />
-              </a>
-              ` : ''}
-              ${project.itch ? `
-              <a href="#" onclick="window.open('${project.itch}', '_blank'); event.preventDefault();">
-                <img src="assets/icons/itch.png" alt="View on Itch.io" />
-              </a>
-              ` : ''}
-            </div>
-            <a href="javascript:void(0)" onclick="openOverlay('${id}')">
-              <img class="project-img" src="${imageUrl}" alt="${title}" />
-              <div class="project-mask">
-                <div class="project-caption">
-                  <h5 class="white">${title}</h5>
-                  <p class="white">${subtitle}</p>
-                </div>
+          <div class="project-section" data-aos="fade-up" data-aos-duration="800">
+            <div class="project-section-header">
+              <div class="project-section-title">
+                <h3>${project.title}</h3>
+                <p class="project-tagline">${project.subtitle}</p>
               </div>
-            </a>
+              ${linksHtml ? `<div class="project-links">${linksHtml}</div>` : ''}
+            </div>
+            <div class="project-section-body">
+              <div class="project-static-description">
+                ${staticHtml}
+              </div>
+              <div class="project-carousel-column">
+                <div class="inline-carousel-container">
+                  <div class="inline-carousel-track" id="carousel-track-${id}"></div>
+                  <button class="inline-carousel-button prev" id="carousel-prev-${id}" aria-label="Previous image">❮</button>
+                  <button class="inline-carousel-button next" id="carousel-next-${id}" aria-label="Next image">❯</button>
+                </div>
+                <div class="inline-carousel-dots" id="carousel-dots-${id}"></div>
+                <div class="inline-carousel-caption" id="carousel-caption-${id}"></div>
+              </div>
+            </div>
           </div>
         `;
       }
 
-      // Project configurations
-      const projectConfigs = [
-        {
-          id: 'shaders',
-          imageUrl: 'assets/shaders/outlines.png',
-          title: 'Shader Projects',
-          subtitle: 'Unity, C#, ShaderGraph, HLSL'
-        },
-        {
-          id: 'volleyguns',
-          imageUrl: 'assets/volleyguns/menu.png',
-          title: 'VolleyGuns',
-          subtitle: 'Unity, C#, ShaderGraph, HLSL'
-        },
-        {
-          id: 'freakshow',
-          imageUrl: 'assets/freakshow/freakshow.png',
-          title: 'Freakshow',
-          subtitle: 'Unity, C#, Netcode'
-        },
-        {
-          id: 'dontjump',
-          imageUrl: 'assets/jump/dontjump.png',
-          title: "Don't Press A to Jump",
-          subtitle: 'Playdate SDK, Lua, Aseprite'
-        },
-        {
-          id: 'axolotlquest',
-          imageUrl: 'assets/axolotl/axolotlquest.png',
-          title: 'Super Axolotl Quest: Overdrive',
-          subtitle: 'Unity, C#, Blender'
-        },
-        {
-          id: 'metrofracture',
-          imageUrl: 'assets/metro/metrofracture.png',
-          title: 'Metro Fracture',
-          subtitle: 'Unity, C#, Aseprite'
-        }
-      ];
+      const projectOrder = ['shaders', 'volleyguns', 'uhoh', 'dontjump', 'freakshow'];
 
-      // Render all project boxes
       document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('projects-container');
-        const projectsHtml = projectConfigs.map(config => 
-          createProjectBox(
-            config.id,
-            projectData[config.id],
-            config.imageUrl,
-            config.title,
-            config.subtitle
-          )
-        ).join('');
-        
-        container.innerHTML = projectsHtml;
+        container.innerHTML = projectOrder.map(id => createProjectSection(id, projectData[id])).join('');
+        projectOrder.forEach(id => initCarousel(id));
       });
     </script>
   </body>
